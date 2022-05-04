@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { SecretarioComponent } from './secretario.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
+import { AuthGuardSecretaria } from '../guard/authSecretaria.guard';
 
 
 const routes: Routes = [
@@ -13,6 +14,9 @@ const routes: Routes = [
         children: [
             { path: '', component: DashboardComponent },
             { path: 'progress', component: ProgressComponent },
+        ],
+        canActivateChild:[
+            AuthGuardSecretaria
         ]
     }
 ];

@@ -8,6 +8,9 @@ import { NopagefoundComponent } from './npagefound/nopagefound/nopagefound.compo
 import { SecretarioModule } from './secretario/secretario.module';
 import { AuthModule } from './auth/auth.module';
 import { PublicModule } from './public/public.module';
+import { AdministradorModule } from './administrador/administrador.module';
+import { AuthGuardSecretaria } from './guard/authSecretaria.guard';
+import { AuthGuardDirector } from './guard/authAdministrador.guard';
 
 
 @NgModule({
@@ -18,11 +21,15 @@ import { PublicModule } from './public/public.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AdministradorModule,
     SecretarioModule,
     PublicModule,
     AuthModule
   ],
-  providers: [],
+  providers: [
+    AuthGuardSecretaria,
+    AuthGuardDirector
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

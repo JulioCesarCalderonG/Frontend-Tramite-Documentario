@@ -6,6 +6,7 @@ import { SecretarioRoutingModule } from './secretario/secretario.routing';
 import { AuthRoutingModule } from './auth/auth.routing';
 
 import { NopagefoundComponent } from './npagefound/nopagefound/nopagefound.component';
+import { AdminRoutingModule } from './administrador/administrador.routing';
 
 
 
@@ -23,6 +24,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     PublicRoutingModule,
+    AdminRoutingModule,
     SecretarioRoutingModule,
     AuthRoutingModule
   ],

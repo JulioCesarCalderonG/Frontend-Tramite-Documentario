@@ -4,7 +4,7 @@ import {RouterModule} from '@angular/router'
 import { LoginComponent } from './login/login.component';
 import { AuthComponent } from './auth.component';
 import { FormsModule } from '@angular/forms';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -17,6 +17,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     RouterModule,
+    HttpClientModule,
+    FormsModule
   ]
 })
 export class AuthModule { }
