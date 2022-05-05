@@ -11,6 +11,8 @@ import { PublicModule } from './public/public.module';
 import { AdministradorModule } from './administrador/administrador.module';
 import { AuthGuardSecretaria } from './guard/authSecretaria.guard';
 import { AuthGuardDirector } from './guard/authAdministrador.guard';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorInterceptor } from './interceptor/interceptor.interceptor';
 
 
 @NgModule({
@@ -28,7 +30,12 @@ import { AuthGuardDirector } from './guard/authAdministrador.guard';
   ],
   providers: [
     AuthGuardSecretaria,
-    AuthGuardDirector
+    AuthGuardDirector,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorInterceptor,
+      multi:true
+    }
   ],
   bootstrap: [AppComponent]
 })

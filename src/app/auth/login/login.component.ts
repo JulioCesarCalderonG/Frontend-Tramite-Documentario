@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
           timer: 1500
         });
        sessionStorage.setItem('x-token',data.token);
-       this.router.navigate(['/admin/usuario'])
+       this.router.navigate(['/secretaria'])
       },
       (error)=>{
         console.log(error);
