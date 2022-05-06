@@ -7,8 +7,11 @@ import { SharedModule } from '../shared/shared.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { SecretarioComponent } from './secretario.component';
-
-
+import { DocumentoInternoComponent } from './documento-interno/documento-interno.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { FormsModule } from '@angular/forms';
+import { IgetEditorModule } from '@iget/editor';
+import { NgxEditorModule } from 'ngx-editor';
 
 
 
@@ -16,17 +19,22 @@ import { SecretarioComponent } from './secretario.component';
   declarations: [
     DashboardComponent,
     ProgressComponent,
-    SecretarioComponent
+    SecretarioComponent,
+    DocumentoInternoComponent
   ],
   exports:[
     DashboardComponent,
     ProgressComponent,
+    DocumentoInternoComponent,
     SecretarioComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    NgxEditorModule,
+    AngularEditorModule
   ]
 })
 export class SecretarioModule { }

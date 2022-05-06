@@ -13,6 +13,7 @@ import { AuthGuardSecretaria } from './guard/authSecretaria.guard';
 import { AuthGuardDirector } from './guard/authAdministrador.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorInterceptor } from './interceptor/interceptor.interceptor';
+import { IgetEditorModule } from '@iget/editor';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { InterceptorInterceptor } from './interceptor/interceptor.interceptor';
     AdministradorModule,
     SecretarioModule,
     PublicModule,
-    AuthModule
+    AuthModule,
+    IgetEditorModule
   ],
   providers: [
     AuthGuardSecretaria,
