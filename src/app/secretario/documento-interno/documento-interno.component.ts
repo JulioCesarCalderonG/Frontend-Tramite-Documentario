@@ -96,6 +96,7 @@ export class DocumentoInternoComponent implements OnInit {
     if (event.target.value !== "" && event.target.value.length > 1) {
       document.getElementById('seleTwo')?.classList.remove('invi');
       document.getElementById('seleOne')?.classList.add('invi');
+      
     }
     if (event.target.value !== "" && event.target.value.length === 1) {
       document.getElementById('seleTwo')?.classList.add('invi')
