@@ -48,4 +48,6 @@ Email inbox Page
   .inbox-center .checkbox {
     margin-top: -13px;
     height: 20px; }
-  
+  .invi{
+    display:none
+  }

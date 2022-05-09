@@ -2,26 +2,24 @@
     <div class="col-xlg-12 col-lg-12 col-md-8 bg-light-part b-l">
         <div class="card-body">
             <div class="form-group">
-                <h5 class="m-b-10">Select box</h5>
-                <select class="selectpicker" data-style="form-control btn-secondary">
-                    <option>Mustard</option>
-                    <option>Ketchup</option>
-                    <option>Relish</option>
+                <h5 class="m-b-10">Seleccionar tipo documento</h5>
+                <select  (click)="verDoc($event)" class="form-control" style="width: 100%; height:36px;" tabindex="-1" aria-hidden="true">
+                    <option value="">Seleccionar una opcion</option>
+                    <option *ngFor="let documento of listTipoDoc" value="{{documento.sigla}}" >{{documento.nombre}}</option>
                 </select>
             </div>
-            <div class="form-group">
-                <h5 class="m-t-20">Multiple select boxes</h5>
-                <select class="select2 m-b-10 select2-multiple" style="width: 100%" multiple="multiple"
-                    data-placeholder="Choose">
-                        <option value="AZ">Arizona</option>
-                        <option value="CO">Colorado</option>
-                        <option value="ID">Idaho</option>
-                        <option value="MT">Montana</option>
-                        <option value="NE">Nebraska</option>
-                        <option value="NM">New Mexico</option>
-                        <option value="ND">North Dakota</option>
-                        <option value="UT">Utah</option>
-                        <option value="WY">Wyoming</option>
+            <div class="form-group invi" id="seleOne">
+                <h5 class="m-b-10">Seleccione un area</h5>
+                <select class="select2 form-control custom-select select2-hidden-accessible" style="width: 100%; height:36px;" tabindex="-1" aria-hidden="true">
+                    <option>Seleccionar una opcion</option>
+                    <option *ngFor="let area of listAreas" value="{{area.sigla}}">{{area.nombre}}</option>
+                </select>
+            </div>
+            <div class="form-group invi" id="seleTwo" >
+                <h5 class="m-t-20">Seleccione las areas</h5>
+                <select class="select2 form-control select2-multiple" style="width: 100%" multiple="multiple"
+                    data-placeholder="Seleccione una opcion">
+                        <option *ngFor="let areas of listAreas" value="{{areas.sigla}}">{{areas.nombre}}</option>
                 </select>
             </div>
             <div class="form-group">

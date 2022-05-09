@@ -13,8 +13,6 @@ import { FormsModule } from '@angular/forms';
 import { IgetEditorModule } from '@iget/editor';
 import { NgxEditorModule } from 'ngx-editor';
 
-
-
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -34,7 +32,7 @@ import { NgxEditorModule } from 'ngx-editor';
     RouterModule,
     FormsModule,
     NgxEditorModule,
-    AngularEditorModule
+    AngularEditorModule,
   ]
 })
 export class SecretarioModule { }
