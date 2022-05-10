@@ -28,7 +28,7 @@ import { IgetEditorModule } from '@iget/editor';
     SecretarioModule,
     PublicModule,
     AuthModule,
-    IgetEditorModule
+    IgetEditorModule,
   ],
   providers: [
     AuthGuardSecretaria,

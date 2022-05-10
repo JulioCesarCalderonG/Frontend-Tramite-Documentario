@@ -9,10 +9,10 @@ import { ProgressComponent } from './progress/progress.component';
 import { SecretarioComponent } from './secretario.component';
 import { DocumentoInternoComponent } from './documento-interno/documento-interno.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IgetEditorModule } from '@iget/editor';
 import { NgxEditorModule } from 'ngx-editor';
-
+import { NgSelect2Module } from 'ng-select2';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -30,9 +30,11 @@ import { NgxEditorModule } from 'ngx-editor';
     CommonModule,
     SharedModule,
     RouterModule,
+    ReactiveFormsModule,
     FormsModule,
     NgxEditorModule,
     AngularEditorModule,
+    NgSelect2Module
   ]
 })
 export class SecretarioModule { }
