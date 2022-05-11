@@ -14,6 +14,7 @@ import { AuthGuardDirector } from './guard/authAdministrador.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorInterceptor } from './interceptor/interceptor.interceptor';
 import { IgetEditorModule } from '@iget/editor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { IgetEditorModule } from '@iget/editor';
     PublicModule,
     AuthModule,
     IgetEditorModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     AuthGuardSecretaria,

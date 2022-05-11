@@ -1,48 +1,36 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Area, AreaResult } from 'src/app/interface/Area.interface';
 import { DocumentInter } from 'src/app/interface/documentInter.interface';
 import { AreaService } from 'src/app/services/area.service';
 import { DocumentoInternoService } from 'src/app/services/documento-interno.service';
 import { TipoDocumentoService } from 'src/app/services/tipo-documento.service';
 import { TipoDocResult, Tipodocumento } from '../../interface/tipoDocumento.interface';
-import { Select2OptionData } from 'ng-select2';
-import { Options } from 'select2';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { SelectAreas } from '../../interface/areaSelect.interface';
+import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-documento-interno',
   templateUrl: './documento-interno.component.html',
-  styleUrls: ['./documento-interno.component.css']
+  styleUrls: ['./documento-interno.component.css'],
 })
 export class DocumentoInternoComponent implements OnInit {
 
-  exampleData=[
-    {
-      id: 'multiple1',
-      text: 'Multiple 1'
-    },
-    {
-      id: 'multiple2',
-      text: 'Multiple 2'
-    },
-    {
-      id: 'multiple3',
-      text: 'Multiple 3'
-    },
-    {
-      id: 'multiple4',
-      text: 'Multiple 4'
-    }
-  ];
-  value:string[] = ['multiple2', 'multiple4'];
-
-  options: Options = {
-      width: '900',
-      multiple: true,
-      tags: true
-    };
+  dropdownList: Array<SelectAreas>=this.getData();
+  toppings = new FormControl();
+  selectAr?: Array<string>;
+  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  dropdownSettings: IDropdownSettings={
+    singleSelection: false,
+    idField: 'item_id',
+    textField: 'item_text',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
   listTipoDoc: Array<Tipodocumento> = [];
   listArea?: Array<Area>;
-  listAreas?: Array<Area>;
+  listAreas: Array<Area>=[];
   editAr: boolean = false;
   htmlContent = '';
   archivo?: Array<File>;
@@ -65,14 +53,14 @@ export class DocumentoInternoComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
-   this.mostrarDatos();
-    this.mostrarTipoDoc();
+  ngOnInit():void{
     this.mostrarArea();
+    this.mostrarTipoDoc();
+    this.getData();
+    setTimeout(() => {
+      this.dropdownList = this.getData();
+    }, 5000);
   }
-mostrarDatos(){
-  
-}
   mostrarTipoDoc() {
     this.tipoDocService.getTipoDocumento(1).subscribe(
       (data: TipoDocResult) => {
@@ -85,16 +73,35 @@ mostrarDatos(){
       }
     )
   }
+  
   mostrarArea() {
     this.areaService.getAreas(1).subscribe(
       (data: AreaResult) => {
-        console.log(data);
         this.listArea = data.area;
+        //this.listAreas = data.area;
       },
       (error) => {
         console.log(error);
       }
     )
+  }
+  getData():Array<SelectAreas>{
+    let listSelect: Array<SelectAreas> = [];
+    this.areaService.getAreas(1).subscribe(
+      (data: AreaResult) => {
+        this.listAreas=data.area;
+        for (let i = 0; i < this.listAreas!.length; i++) {
+          listSelect.push({item_id:Number(this.listAreas[i].id),item_text:this.listAreas[i].nombre})
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+    
+    return listSelect;
+    
+    
   }
   verDoc(event: any) {
 
@@ -122,6 +129,7 @@ mostrarDatos(){
   crearDocumento() {
     const formData = new FormData();
     console.log(this.documentForm);
+    console.log(this.selectAr);
     
     /* Array.from(this.archivo!).forEach((f:any) => {formData.append('archivo',f)});
     formData.append('tipoDocumento', this.documentForm.tipoDoc);

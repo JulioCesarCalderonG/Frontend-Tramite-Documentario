@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -12,7 +13,12 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IgetEditorModule } from '@iget/editor';
 import { NgxEditorModule } from 'ngx-editor';
-import { NgSelect2Module } from 'ng-select2';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import {MatSelectModule} from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import {MatNativeDateModule} from '@angular/material/core';
+import { MaterialModule } from '../material/material.module';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -28,13 +34,22 @@ import { NgSelect2Module } from 'ng-select2';
   ],
   imports: [
     CommonModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatNativeDateModule,
     SharedModule,
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
     NgxEditorModule,
     AngularEditorModule,
-    NgSelect2Module
-  ]
+    NgMultiSelectDropDownModule.forRoot(),
+    MaterialModule,
+    MatSelectModule
+  ],
+  providers:[
+
+  ],
+  bootstrap: [],
 })
 export class SecretarioModule { }
