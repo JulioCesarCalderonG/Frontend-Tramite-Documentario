@@ -8,6 +8,7 @@ import { TipoDocResult, Tipodocumento } from '../../interface/tipoDocumento.inte
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { SelectAreas } from '../../interface/areaSelect.interface';
 import { FormControl } from '@angular/forms';
+import { EditorConfig } from '../../interface/AngularEditor.interface';
 @Component({
   selector: 'app-documento-interno',
   templateUrl: './documento-interno.component.html',
@@ -15,22 +16,9 @@ import { FormControl } from '@angular/forms';
 })
 export class DocumentoInternoComponent implements OnInit {
 
-  dropdownList: Array<SelectAreas>=this.getData();
-  toppings = new FormControl();
-  selectAr?: Array<string>;
-  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
-  dropdownSettings: IDropdownSettings={
-    singleSelection: false,
-    idField: 'item_id',
-    textField: 'item_text',
-    selectAllText: 'Select All',
-    unSelectAllText: 'UnSelect All',
-    itemsShowLimit: 3,
-    allowSearchFilter: true
-  };
   listTipoDoc: Array<Tipodocumento> = [];
+  editorConfig = EditorConfig;
   listArea?: Array<Area>;
-  listAreas: Array<Area>=[];
   editAr: boolean = false;
   htmlContent = '';
   archivo?: Array<File>;
@@ -39,7 +27,7 @@ export class DocumentoInternoComponent implements OnInit {
     asunto:'',
     descripcion:'',
     destinoOne:'',
-    destinoTwo:'',
+    destinoTwo:[],
     referencia:'',
     tipoDoc:''
   }
@@ -56,10 +44,6 @@ export class DocumentoInternoComponent implements OnInit {
   ngOnInit():void{
     this.mostrarArea();
     this.mostrarTipoDoc();
-    this.getData();
-    setTimeout(() => {
-      this.dropdownList = this.getData();
-    }, 5000);
   }
   mostrarTipoDoc() {
     this.tipoDocService.getTipoDocumento(1).subscribe(
@@ -78,30 +62,11 @@ export class DocumentoInternoComponent implements OnInit {
     this.areaService.getAreas(1).subscribe(
       (data: AreaResult) => {
         this.listArea = data.area;
-        //this.listAreas = data.area;
       },
       (error) => {
         console.log(error);
       }
     )
-  }
-  getData():Array<SelectAreas>{
-    let listSelect: Array<SelectAreas> = [];
-    this.areaService.getAreas(1).subscribe(
-      (data: AreaResult) => {
-        this.listAreas=data.area;
-        for (let i = 0; i < this.listAreas!.length; i++) {
-          listSelect.push({item_id:Number(this.listAreas[i].id),item_text:this.listAreas[i].nombre})
-        }
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
-    
-    return listSelect;
-    
-    
   }
   verDoc(event: any) {
 
@@ -127,22 +92,32 @@ export class DocumentoInternoComponent implements OnInit {
     
   }
   crearDocumento() {
-    const formData = new FormData();
-    console.log(this.documentForm);
-    console.log(this.selectAr);
     
-    /* Array.from(this.archivo!).forEach((f:any) => {formData.append('archivo',f)});
+    const formData = new FormData();
+    if (!document.getElementById('seleOne')?.classList.contains("invi")) {
+      console.log('Select one');
+      formData.append('destino', this.documentForm.destinoOne);
+    }
+    if (!document.getElementById('seleTwo')?.classList.contains("invi")) {
+      Array.from(this.documentForm.destinoTwo).forEach((f:any) => {formData.append('destino',f)});
+    }
     formData.append('tipoDocumento', this.documentForm.tipoDoc);
-    formData.append('destino', this.documentForm.destinoOne);
+    formData.append('asunto', this.documentForm.asunto);
+    if (this.documentForm.referencia !== '') {
+      formData.append('referencia',this.documentForm.referencia);
+    }
+    formData.append('descripcion', this.documentForm.descripcion);
+    if (this.archivo !== undefined) {
+      Array.from(this.archivo!).forEach((f:any) => {formData.append('archivo',f)});
+    }  
     this.documentService.postDocumento(formData).subscribe(
       (data) => {
         console.log(data);
-
       },
       (error) => {
         console.log(error);
 
       }
-    ) */
+    )
   }
 }

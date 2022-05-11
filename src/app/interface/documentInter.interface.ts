@@ -5,6 +5,6 @@ export interface DocumentInter{
     descripcion:string;
     referencia:string;
     destinoOne:string;
-    destinoTwo:string;
+    destinoTwo:Array<string>;
     tipoDoc:string;
 }

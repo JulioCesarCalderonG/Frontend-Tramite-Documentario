@@ -1,45 +1,39 @@
 
         <div class="card-body">
             <form (ngSubmit)="crearDocumento()">
-                <div class="form-group">
-                        <mat-label>Toppings</mat-label>
-                        <mat-select [(ngModel)]="selectAr" multiple>
-                          <mat-option *ngFor="let topping of listArea" [value]="topping.id">{{topping.nombre}}</mat-option>
-                        </mat-select>
-                </div>
+                
                 <div class="form-group">
                     <h5 class="m-b-10">Seleccionar tipo documento</h5>
                     <select (click)="verDoc($event)" class="form-control" style="width: 100%; height:36px;"
-                        tabindex="-1" aria-hidden="true">
+                        tabindex="-1" aria-hidden="true" [(ngModel)]="documentForm.tipoDoc">
                         <option value="">Seleccionar una opcion</option>
                         <option *ngFor="let documento of listTipoDoc" value="{{documento.sigla}}">{{documento.nombre}}
                         </option>
                     </select>
                 </div>
-                <div class="form-group seleOne" id="seleOne">
-                    <h5 class="m-b-10">Seleccione un area</h5>
-                    <select class="form-control" style="width: 100%; height:36px;" tabindex="-1" aria-hidden="true"
-                        [(ngModel)]="documentForm.destinoOne">
-                        <option value="">Seleccionar una opcion</option>
-                        <option *ngFor="let area of listArea" value="{{area.id}}">{{area.nombre}}</option>
-                    </select>
+                <div class="form-group invi" id="seleOne">
+                    <mat-label>Seleccionar el destino</mat-label>
+                    <mat-select [(ngModel)]="documentForm.destinoOne">
+                      <mat-option *ngFor="let area of listArea" [value]="area.id">
+                        {{area.nombre}}
+                      </mat-option>
+                    </mat-select>
                 </div>
                 <div class="form-group invi" id="seleTwo">
-                    <h5 class="m-t-20">Seleccione las areas</h5>
-                    <select class="select2 form-control select2-multiple" style="width: 100%" multiple="multiple"
-                        data-placeholder="Seleccione una opcion">
-                        <option *ngFor="let areas of listArea" value="{{areas.sigla}}">{{areas.nombre}}</option>
-                    </select>
+                    <mat-label>Seleccionar el destino</mat-label>
+                    <mat-select [(ngModel)]="documentForm.destinoTwo" multiple>
+                      <mat-option *ngFor="let topping of listArea" [value]="topping.id">{{topping.nombre}}</mat-option>
+                    </mat-select>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" placeholder="To:">
+                    <input class="form-control" placeholder="Asunto:" [(ngModel)]="documentForm.asunto">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" placeholder="Subject:">
+                    <input class="form-control" placeholder="Referencia:" [(ngModel)]="documentForm.referencia">
                 </div>
                 <div class="form-group">
                     <div class="NgxEditor__Wrapper">
-                        <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent"></angular-editor>
+                        <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="documentForm.descripcion" [config]="editorConfig"></angular-editor>
                     </div>
                 </div>
                 <h4><i class="ti-link"></i> Attachment</h4>
