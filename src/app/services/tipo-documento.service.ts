@@ -10,7 +10,10 @@ export class TipoDocumentoService {
   url = `${urlBack}/tipodocumento`
   constructor(private http: HttpClient) { }
 
-  getTipoDocumento(habilitado:number):Observable<any>{
+  getTipoDocumentos(habilitado:number):Observable<any>{
     return this.http.get(this.url,{params:{habilitado}})
+  }
+  getTipoDocumeto(id:any):Observable<any>{
+    return  this.http.get(this.url+'/'+id);
   }
 }

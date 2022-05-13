@@ -4,7 +4,7 @@ import { DocumentInter } from 'src/app/interface/documentInter.interface';
 import { AreaService } from 'src/app/services/area.service';
 import { DocumentoInternoService } from 'src/app/services/documento-interno.service';
 import { TipoDocumentoService } from 'src/app/services/tipo-documento.service';
-import { TipoDocResult, Tipodocumento } from '../../interface/tipoDocumento.interface';
+import { TipoDocResult, Tipodocumento, TipoDocResultInd } from '../../interface/tipoDocumento.interface';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { SelectAreas } from '../../interface/areaSelect.interface';
 import { FormControl } from '@angular/forms';
@@ -31,6 +31,7 @@ export class DocumentoInternoComponent implements OnInit {
     referencia:'',
     tipoDoc:''
   }
+  tipoDoc?:any;
   @ViewChild('fileDocument', { static: false }) fileDocument?: ElementRef;
   
   constructor(
@@ -46,7 +47,7 @@ export class DocumentoInternoComponent implements OnInit {
     this.mostrarTipoDoc();
   }
   mostrarTipoDoc() {
-    this.tipoDocService.getTipoDocumento(1).subscribe(
+    this.tipoDocService.getTipoDocumentos(1).subscribe(
       (data: TipoDocResult) => {
         console.log(data);
         this.listTipoDoc = data.tipodocumento;
@@ -70,11 +71,34 @@ export class DocumentoInternoComponent implements OnInit {
   }
   verDoc(event: any) {
 
+    
     if (event.target.value !== "" && event.target.value.length > 1) {
+      this.tipoDocService.getTipoDocumeto(event.target.value).subscribe(
+        (data:TipoDocResultInd)=>{
+          this.tipoDoc = data.tipodocumento.id;
+          console.log(this.tipoDoc);
+          
+        },
+        (error)=>{
+          console.log(error);
+          
+        }
+      )
       document.getElementById('seleTwo')?.classList.remove('invi');
       document.getElementById('seleOne')?.classList.add('invi');
     }
     if (event.target.value !== "" && event.target.value.length === 1) {
+      this.tipoDocService.getTipoDocumeto(event.target.value).subscribe(
+        (data:TipoDocResultInd)=>{
+          this.tipoDoc = data.tipodocumento.id;
+          console.log(this.tipoDoc);
+          
+        },
+        (error)=>{
+          console.log(error);
+          
+        }
+      )
       document.getElementById('seleTwo')?.classList.add('invi')
       document.getElementById('seleOne')?.classList.remove('invi');
     }
@@ -101,7 +125,7 @@ export class DocumentoInternoComponent implements OnInit {
     if (!document.getElementById('seleTwo')?.classList.contains("invi")) {
       Array.from(this.documentForm.destinoTwo).forEach((f:any) => {formData.append('destino',f)});
     }
-    formData.append('tipoDocumento', this.documentForm.tipoDoc);
+    formData.append('tipoDocumento', this.tipoDoc);
     formData.append('asunto', this.documentForm.asunto);
     if (this.documentForm.referencia !== '') {
       formData.append('referencia',this.documentForm.referencia);

@@ -5,6 +5,11 @@ export interface TipoDocResult {
     msg:           string;
     tipodocumento: Tipodocumento[];
 }
+export interface TipoDocResultInd {
+    ok:            boolean;
+    msg:           string;
+    tipodocumento: Tipodocumento;
+}
 
 export interface Tipodocumento {
     id:     number;

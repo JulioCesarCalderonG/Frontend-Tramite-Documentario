@@ -13,4 +13,5 @@ export class DocumentoInternoService {
   postDocumento(data:FormData):Observable<any>{
     return this.http.post(this.url,data);
   }
+  
 }
