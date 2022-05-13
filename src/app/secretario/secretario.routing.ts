@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { AuthGuardSecretaria } from '../guard/authSecretaria.guard';
 import { DocumentoInternoComponent } from './documento-interno/documento-interno.component';
+import { MostrarDocumentoInternoComponent } from './mostrar-documento-interno/mostrar-documento-interno.component';
 
 
 const routes: Routes = [
@@ -16,8 +17,9 @@ const routes: Routes = [
             { path: '', component: DashboardComponent },
             { path: 'progress', component: ProgressComponent },
             { path: 'documento-interno', component: DocumentoInternoComponent },
+            { path: 'mostrar-documento-interno', component: MostrarDocumentoInternoComponent }
         ],
-        canActivateChild:[
+        canActivateChild: [
             AuthGuardSecretaria
         ]
     }

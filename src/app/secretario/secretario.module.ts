@@ -19,12 +19,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import {MatNativeDateModule} from '@angular/material/core';
 import { MaterialModule } from '../material/material.module';
+import { MostrarDocumentoInternoComponent } from './mostrar-documento-interno/mostrar-documento-interno.component';
 @NgModule({
   declarations: [
     DashboardComponent,
     ProgressComponent,
     SecretarioComponent,
-    DocumentoInternoComponent
+    DocumentoInternoComponent,
+    MostrarDocumentoInternoComponent
   ],
   exports:[
     DashboardComponent,

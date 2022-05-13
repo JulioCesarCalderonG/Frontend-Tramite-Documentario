@@ -1,0 +1,48 @@
+<h4 class="card-title">Responsive Table </h4>
+<h6 class="card-subtitle">Create responsive tables by wrapping any <code>.table</code> in
+    <code>.table-responsive </code>
+</h6>
+<div class="table-responsive">
+    <table class="table text-center">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Tipo Documento</th>
+                <th>Asunto</th>
+                <th>Fecha</th>
+                <th>Referencia</th>
+                <th>Descripcion</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let documento of listDocumento">
+                <td><a href="javascript:void(0)">{{documento.codigo}}</a></td>
+                <td>{{documento.tipo}}</td>
+                <td>{{documento.asunto}}</td>
+                <td>{{documento.fecha}}</td>
+                <td>{{documento.referencia}}</td>
+                <td>{{documento.descripcion}}</td>
+                <td>
+                    <div class="label label-table label-danger" *ngIf="documento.estadoFirma === 0">Sin firmar</div>
+                </td>
+                <td>
+                    <div class="label label-table label-success" *ngIf="documento.estadoFirma === 1">Firmado</div>
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <button class="btn btn-facebook waves-effect waves-light" type="button"> <i class="fa fa-file-pdf-o"></i> </button>
+                        <button class="btn btn-twitter waves-effect waves-light" type="button"> <i class="fa fa-twitter"></i> </button>
+                        <button class="btn btn-googleplus waves-effect waves-light" type="button"> <i class="fa fa-google-plus"></i> </button>
+                    </div>
+                </td>
+        </tbody>
+    </table>
+</div>
+
+<button type="button" class="btn btn-primary btn-circle"><i class="fa fa-list"></i> </button>
+<button type="button" class="btn btn-success btn-circle"><i class="fa fa-link"></i> </button>
+<button type="button" class="btn btn-info btn-circle"><i class="fa fa-check"></i> </button>
+<button type="button" class="btn btn-warning btn-circle"><i class="fa fa-times"></i> </button>
+<button type="button" class="btn btn-danger btn-circle"><i class="fa fa-heart"></i> </button>
