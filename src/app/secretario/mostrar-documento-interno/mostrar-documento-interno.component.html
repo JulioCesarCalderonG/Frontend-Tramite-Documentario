@@ -11,7 +11,6 @@
                 <th>Asunto</th>
                 <th>Fecha</th>
                 <th>Referencia</th>
-                <th>Descripcion</th>
                 <th>Estado</th>
                 <th>Acciones</th>
             </tr>
@@ -23,26 +22,51 @@
                 <td>{{documento.asunto}}</td>
                 <td>{{documento.fecha}}</td>
                 <td>{{documento.referencia}}</td>
-                <td>{{documento.descripcion}}</td>
                 <td>
                     <div class="label label-table label-danger" *ngIf="documento.estadoFirma === 0">Sin firmar</div>
                 </td>
                 <td>
                     <div class="label label-table label-success" *ngIf="documento.estadoFirma === 1">Firmado</div>
                 </td>
-                <td>
-                    <div class="btn-group">
-                        <button class="btn btn-facebook waves-effect waves-light" type="button"> <i class="fa fa-file-pdf-o"></i> </button>
+                <td class="text-nowrap text-center">
+                    <a href="http://localhost:5000/api/pdf/documento-interno?codigo={{documento.codigoDocumento}}"
+                        target="_blank" data-toggle="tooltip" data-original-title="Edit"
+                        class=" btn btn-circle btn-secondary btnAction"> <i class="fa fa-file-pdf-o text-inverse"></i> </a>
+                    <a 
+                        target="_blank" data-toggle="tooltip" data-original-title="Edit"
+                        class="btn btn-circle btn-success btnAction" (click)="asignarCod(documento.codigoDocumento)"
+                        data-toggle="modal" data-target="#derivacionModel" data-whatever="@mdo"
+                        > <i class="fa fa-paper-plane text-inverse m-r-20"></i> </a>
+                    <!-- <button class="btn btn-facebook waves-effect waves-light" type="button"> <i class="fa fa-file-pdf-o"></i> </button>
                         <button class="btn btn-twitter waves-effect waves-light" type="button"> <i class="fa fa-twitter"></i> </button>
-                        <button class="btn btn-googleplus waves-effect waves-light" type="button"> <i class="fa fa-google-plus"></i> </button>
-                    </div>
+                        <button class="btn btn-googleplus waves-effect waves-light" type="button"> <i class="fa fa-google-plus"></i> </button> -->
                 </td>
         </tbody>
     </table>
 </div>
 
-<button type="button" class="btn btn-primary btn-circle"><i class="fa fa-list"></i> </button>
-<button type="button" class="btn btn-success btn-circle"><i class="fa fa-link"></i> </button>
-<button type="button" class="btn btn-info btn-circle"><i class="fa fa-check"></i> </button>
-<button type="button" class="btn btn-warning btn-circle"><i class="fa fa-times"></i> </button>
-<button type="button" class="btn btn-danger btn-circle"><i class="fa fa-heart"></i> </button>
+<div class="modal fade" id="derivacionModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Derivar Documento</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="derivar()">
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Observacion:</label>
+              <textarea class="form-control" id="message-text" [(ngModel)]="derivarForm.observacion"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelar()">Cerrar</button>
+              <button type="submit" class="btn btn-primary">Derivar</button>
+            </div>
+          </form>
+        </div>
+       
+      </div>
+    </div>
+  </div>

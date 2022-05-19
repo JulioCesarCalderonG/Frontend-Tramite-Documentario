@@ -17,4 +17,5 @@ export interface DocumentoInterno {
     destino: string;
     codigo?: string;
     tipo?: string;
+    estadoDerivado?:number;
 }

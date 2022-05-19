@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DocumentoInterno, DocumentoInternoResult } from 'src/app/interface/documento-interno.interface';
 import { DocumentoInternoService } from 'src/app/services/documento-interno.service';
+import { TramiteInternoService } from 'src/app/services/tramite-interno.service';
 
 @Component({
   selector: 'app-mostrar-documento-interno',
@@ -9,7 +10,11 @@ import { DocumentoInternoService } from 'src/app/services/documento-interno.serv
 })
 export class MostrarDocumentoInternoComponent implements OnInit {
   listDocumento?:DocumentoInterno[];
-  constructor(private documentoService:DocumentoInternoService) { }
+  derivarForm={
+    codigoDoc:'',
+    observacion:''
+  }
+  constructor(private documentoService:DocumentoInternoService, private tramiteService: TramiteInternoService) { }
 
   ngOnInit(): void {
     this.mostrarDocumentos();
@@ -28,5 +33,29 @@ export class MostrarDocumentoInternoComponent implements OnInit {
         console.log(error);
       }
     )
+  }
+  asignarCod(codigo:any){
+    this.derivarForm.codigoDoc =codigo;
+  }
+  derivar(){
+    const data = new FormData();
+    data.append('observacion', this.derivarForm.observacion);
+    data.append('codigoDocumento', this.derivarForm.codigoDoc);
+    this.tramiteService.postTramiteInterno(data).subscribe(
+      (data)=>{
+        console.log(data);
+        
+      },
+      (error)=>{
+        console.log(error);
+        
+      }
+    )
+  } 
+  cancelar(){
+    this.derivarForm= {
+      codigoDoc:'',
+      observacion:''
+    }
   }
 }
