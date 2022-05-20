@@ -10,8 +10,10 @@ export class DocumentoInternoService {
   url = `${urlBack}/documentointerno`
   constructor(private http: HttpClient) { }
 
-  getDocumentosInternos():Observable<any>{
-    return this.http.get(this.url);
+  getDocumentosInternos(derivado:string):Observable<any>{
+    return this.http.get(this.url,{params:{
+      estadoDerivado:derivado
+    }});
   }
   postDocumento(data:FormData):Observable<any>{
     return this.http.post(this.url,data);

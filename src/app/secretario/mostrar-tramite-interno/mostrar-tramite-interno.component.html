@@ -1,0 +1,34 @@
+<h4 class="card-title">Responsive Table </h4>
+<h6 class="card-subtitle">Create responsive tables by wrapping any <code>.table</code> in
+    <code>.table-responsive </code>
+</h6>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Año</th>
+                <th>Asunto</th>
+                <th>Referencia</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tramite of listTramite">
+                <td><a href="javascript:void(0)">{{tramite.codigo}}</a></td>
+                <td>{{tramite.ano}}</td>
+                <td>{{tramite.asunto}}</td>
+                <td>{{tramite.referencia}}</td>
+                <td>{{tramite.fecha}}</td>
+                <td>{{tramite.hora}}</td>
+               
+                <td class="text-nowrap text-center">
+                    <a href="http://localhost:5000/api/pdf/documento-interno?codigo={{tramite.codigoDocumento}}"
+                        target="_blank" data-toggle="tooltip" data-original-title="Edit"
+                        class=" btn btn-circle btn-secondary btnAction"> <i class="fa fa-file-pdf-o text-inverse"></i> </a>
+                </td>
+        </tbody>
+    </table>
+</div>

@@ -20,13 +20,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import {MatNativeDateModule} from '@angular/material/core';
 import { MaterialModule } from '../material/material.module';
 import { MostrarDocumentoInternoComponent } from './mostrar-documento-interno/mostrar-documento-interno.component';
+import { MostrarTramiteInternoComponent } from './mostrar-tramite-interno/mostrar-tramite-interno.component';
 @NgModule({
   declarations: [
     DashboardComponent,
     ProgressComponent,
     SecretarioComponent,
     DocumentoInternoComponent,
-    MostrarDocumentoInternoComponent
+    MostrarDocumentoInternoComponent,
+    MostrarTramiteInternoComponent
   ],
   exports:[
     DashboardComponent,
