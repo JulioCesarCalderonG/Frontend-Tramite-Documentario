@@ -7,6 +7,7 @@ import { AuthGuardSecretaria } from '../guard/authSecretaria.guard';
 import { DocumentoInternoComponent } from './documento-interno/documento-interno.component';
 import { MostrarDocumentoInternoComponent } from './mostrar-documento-interno/mostrar-documento-interno.component';
 import { MostrarTramiteInternoComponent } from './mostrar-tramite-interno/mostrar-tramite-interno.component';
+import { MostrarTramiteInternoDerivadoComponent } from './mostrar-tramite-interno-derivado/mostrar-tramite-interno-derivado.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,8 @@ const routes: Routes = [
             { path: 'progress', component: ProgressComponent },
             { path: 'documento-interno', component: DocumentoInternoComponent },
             { path: 'mostrar-documento-interno', component: MostrarDocumentoInternoComponent },
-            { path: 'mostrar-tramite-interno', component: MostrarTramiteInternoComponent }
+            { path: 'mostrar-tramite-interno', component: MostrarTramiteInternoComponent },
+            { path: 'mostrar-destino-interno', component: MostrarTramiteInternoDerivadoComponent }
         ],
         canActivateChild: [
             AuthGuardSecretaria

@@ -21,6 +21,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { MaterialModule } from '../material/material.module';
 import { MostrarDocumentoInternoComponent } from './mostrar-documento-interno/mostrar-documento-interno.component';
 import { MostrarTramiteInternoComponent } from './mostrar-tramite-interno/mostrar-tramite-interno.component';
+import { MostrarTramiteInternoDerivadoComponent } from './mostrar-tramite-interno-derivado/mostrar-tramite-interno-derivado.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -28,7 +29,8 @@ import { MostrarTramiteInternoComponent } from './mostrar-tramite-interno/mostra
     SecretarioComponent,
     DocumentoInternoComponent,
     MostrarDocumentoInternoComponent,
-    MostrarTramiteInternoComponent
+    MostrarTramiteInternoComponent,
+    MostrarTramiteInternoDerivadoComponent
   ],
   exports:[
     DashboardComponent,

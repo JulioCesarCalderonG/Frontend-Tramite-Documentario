@@ -1,0 +1,43 @@
+<h4 class="card-title">Responsive Table </h4>
+<h6 class="card-subtitle">Create responsive tables by wrapping any <code>.table</code> in
+    <code>.table-responsive </code>
+</h6>
+<div class="table-responsive">
+    <table class="table text-center">
+        <thead>
+            <tr>
+                <th>Codigo Tramite</th>
+                <th>Asunto</th>
+                <th>Referencia</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Observacion</th>
+                <th>Accion</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr *ngFor="let destinos of listDestinoInter">
+                <td><a href="javascript:void(0)">{{destinos.codigoTramite}}</a></td>
+                <td>{{destinos.Tramiteinterno.asunto}}</td>
+                <td>{{destinos.Tramiteinterno.referencia}}</td>
+                <td>{{destinos.Tramiteinterno.fecha}}</td>
+                <td>{{destinos.Tramiteinterno.hora}}</td>
+                <td>{{destinos.Tramiteinterno.observacion}}</td>
+                <td>
+                    <div class="label label-table label-danger" *ngIf="destinos.estadoRecepcion === 0">Sin Recepcionar</div>
+                </td>
+                <td>
+                    <div class="label label-table label-success" *ngIf="destinos.estadoRecepcion === 1">Recepcionado</div>
+                </td>
+                <td class="text-nowrap" *ngIf="destinos.estadoRecepcion === 0">
+                    <button class="btn btn-warning waves-effect waves-light" type="button" (click)="recpcionar(destinos.id)"> <i class="fa fa-phone"></i> </button>
+                </td>
+                <td class="text-nowrap" *ngIf="destinos.estadoRecepcion === 1">
+                    <button class="btn btn-circle btn-primary mr-1" type="button"> <i class="fa fa-file-pdf-o"></i> </button>
+                    <button class="btn btn-circle btn-info mr-1" type="button"> <i class="fa fa-twitter"></i> </button>
+                    <button class="btn btn-circle btn-success mr-1" type="button"> <i class="fa fa-google-plus"></i> </button>
+                </td>
+        </tbody>
+    </table>
+</div>
