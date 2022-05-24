@@ -6,17 +6,11 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class TramiteInternoService {
-  url = `${urlBack}/tramiteinterno`
+export class SeguimientoInternoService {
+  url = `${urlBack}/seguimientointerno`
   constructor(private http: HttpClient) { }
 
-  getTramiteInternos():Observable<any>{
-    return this.http.get(this.url);
-  }
-  postTramiteInterno(data:FormData):Observable<any>{
-    return this.http.post(this.url,data);
-  }
-  getTramiteinterno(codigo:string):Observable<any>{
+  getSeguimiento(codigo:string):Observable<any>{
     return this.http.get(`${this.url}/${codigo}`);
   }
 }

@@ -22,6 +22,7 @@ import { MaterialModule } from '../material/material.module';
 import { MostrarDocumentoInternoComponent } from './mostrar-documento-interno/mostrar-documento-interno.component';
 import { MostrarTramiteInternoComponent } from './mostrar-tramite-interno/mostrar-tramite-interno.component';
 import { MostrarTramiteInternoDerivadoComponent } from './mostrar-tramite-interno-derivado/mostrar-tramite-interno-derivado.component';
+import { TramiteInternoDetalladoComponent } from './tramite-interno-detallado/tramite-interno-detallado.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -30,7 +31,8 @@ import { MostrarTramiteInternoDerivadoComponent } from './mostrar-tramite-intern
     DocumentoInternoComponent,
     MostrarDocumentoInternoComponent,
     MostrarTramiteInternoComponent,
-    MostrarTramiteInternoDerivadoComponent
+    MostrarTramiteInternoDerivadoComponent,
+    TramiteInternoDetalladoComponent
   ],
   exports:[
     DashboardComponent,

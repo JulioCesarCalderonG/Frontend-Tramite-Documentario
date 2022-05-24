@@ -17,4 +17,7 @@ export class DestinoInternoService {
       }
     })
   }
+  putRecepcion(id:string | number):Observable<any>{
+    return this.http.put(`${this.url}/recepcionar/${id}`,{});
+  }
 }

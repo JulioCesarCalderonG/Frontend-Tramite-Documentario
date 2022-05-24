@@ -6,6 +6,11 @@ export interface ResultTramiteInterno {
     tramiteinter: Tramiteinter[];
 }
 
+export interface ResultTramiteInternoIndi {
+    ok:           boolean;
+    msg:          string;
+    tramiteinter: Tramiteinter;
+}
 export interface Tramiteinter {
     codigo:          string;
     asunto:          string;
@@ -16,10 +21,19 @@ export interface Tramiteinter {
     codigoDocumento: string;
     observacion:     string;
     hora:            string;
-    Area:            Area;
+    Area?:            Area;
+    Codigodocumento?: Codigodocumento;
 }
 
 export interface Area {
     id:     number;
     nombre: string;
+}
+
+export interface Codigodocumento {
+    codigoUnico:   string;
+    codigo:        string;
+    tipoDocumento: number;
+    idArea:        number;
+    ano:           string;
 }

@@ -1,0 +1,73 @@
+<h3 class="card-title text-center seguimi">Tramite Interno N° {{codigo}} </h3>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-2">
+                    <label for="" class="form-group"><strong>Asunto:</strong></label>
+                </div>
+                <div class="col-lg-10">
+                    {{listTramite!.asunto}}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-2">
+                    <label for="" class="form-group"><strong>Fecha:</strong></label>
+                </div>
+                <div class="col-lg-10">
+                    {{listTramite!.fecha}}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-2">
+                    <label for="" class="form-group"><strong>Referencia:</strong></label>
+                </div>
+                <div class="col-lg-10">
+                    {{listTramite!.referencia}}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-2">
+                    <label for="" class="form-group"><strong>Observacion:</strong></label>
+                </div>
+                <div class="col-lg-10">
+                    {{listTramite!.observacion}}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 ">
+            <button class="btn btn-rounded btn-info float-right">Detallado</button>
+        </div>
+        <div class="col-lg-12 table-responsive mt-5">
+            <h4 class="mb-3 text-center seguimi">Seguimiento</h4>
+            <table class="table full-color-table full-purple-table hover-table">
+                <thead>
+                    <tr>
+                        <th>Destino</th>
+                        <th>Fecha Derivacion</th>
+                        <th>Hora Derivacion</th>
+                        <th>Fecha Recepcion</th>
+                        <th>Hora Recepcion</th>
+                    </tr>
+                </thead>
+                <tbody class="">
+                    
+                    <tr *ngFor="let seguimiento of listSeguimiento">
+                        <td>{{seguimiento.Area.nombre}}</td>
+                        <td>{{seguimiento.fechaDerivado}}</td>
+                        <td>{{seguimiento.horaDerivado}}</td>
+                        <td>{{seguimiento.fechaRecepcion}}</td>
+                        <td>{{seguimiento.horaRecepcion}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
