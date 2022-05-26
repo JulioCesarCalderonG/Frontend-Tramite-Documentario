@@ -24,12 +24,13 @@ export class MostrarDocumentoInternoComponent implements OnInit {
   mostrarDocumentos(){
     this.documentoService.getDocumentosInternos(this.derivacion).subscribe(
       (data:DocumentoInternoResult)=>{
-        console.log(data);
         this.listDocumento = data.documentoInter;
         for (let i = 0; i < this.listDocumento.length; i++) {
           this.listDocumento[i].codigo = this.listDocumento[i].codigoDocumento?.split('-')[1];
           this.listDocumento[i].tipo =this.listDocumento[i].codigoDocumento?.split('-')[2];
         }
+        console.log(this.listDocumento);
+        
       },
       (error)=>{
         console.log(error);
