@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
   login(){
     this.loginService.postLogin(this.loginForm).subscribe(
       (data:LoginResult)=>{
-        console.log(data);
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -33,7 +32,13 @@ export class LoginComponent implements OnInit {
           timer: 1500
         });
        sessionStorage.setItem('x-token',data.token);
-       this.router.navigate(['/secretaria'])
+       if (data.userarea.Usuario.Cargo.nombre==='DIRECTOR') {
+        this.router.navigate(['/director']);
+       }
+       else if (data.userarea.Usuario.Cargo.nombre==="SECRETARIA") {
+        this.router.navigate(['/secretaria']);
+       }
+       
       },
       (error)=>{
         console.log(error);

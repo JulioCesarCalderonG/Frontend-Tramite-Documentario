@@ -31,21 +31,18 @@
                 <td class="text-nowrap text-center">
                     <a href="http://localhost:5000/api/pdf/documento-interno?codigo={{documento.codigoDocumento}}"
                         target="_blank" data-toggle="tooltip" data-original-title="Edit"
-                        class=" btn btn-circle btn-secondary btnAction"> <i class="fa fa-file-pdf-o text-inverse"></i> </a>
+                        class=" btn btn-circle btn-secondary btnAction mr-2"> <i class="fa fa-file-pdf-o text-inverse"></i> </a>
                     <a 
                         target="_blank" data-toggle="tooltip" data-original-title="Edit"
-                        *ngIf="documento.estadoDerivado === 0"
-                        class="btn btn-circle btn-success btnAction" (click)="asignarCod(documento.codigoDocumento)"
+                        *ngIf="documento.estadoFirma === 0"
+                        class="btn btn-circle btn-primary btnAction" 
                         data-toggle="modal" data-target="#derivacionModel" data-whatever="@mdo"
-                        > <i class="fa fa-paper-plane text-inverse m-r-20"></i> </a>
+                        > <i class="fa fa-light fa-signature text-inverse"></i> </a>
                     <a 
                         target="_blank" data-toggle="tooltip" data-original-title="Edit"
-                        *ngIf="documento.estadoDerivado === 1"  
+                        *ngIf="documento.estadoFirma === 1"  
                         class="btn btn-circle btn-warning btnAction"
-                        > <i class="fa fa-paper-plane text-inverse m-r-20"></i> </a>
-                    <!-- <button class="btn btn-facebook waves-effect waves-light" type="button"> <i class="fa fa-file-pdf-o"></i> </button>
-                        <button class="btn btn-twitter waves-effect waves-light" type="button"> <i class="fa fa-twitter"></i> </button>
-                        <button class="btn btn-googleplus waves-effect waves-light" type="button"> <i class="fa fa-google-plus"></i> </button> -->
+                        > <i class="fa fa-light fa-signature"></i> </a>
                 </td>
               </tr>
         </tbody>
@@ -62,15 +59,13 @@
           </button>
         </div>
         <div class="modal-body">
-          <form (ngSubmit)="derivar()">
-            <div class="form-group">
-              <label for="accion-text" class="col-form-label">Accion:</label>
-              <input class="form-control" placeholder="Accion" [(ngModel)]="derivarForm.accion">
-            </div>
-            <div class="form-group">
-              <label for="observacion-text" class="col-form-label">Observacion:</label>
-              <textarea class="form-control" id="observacion-text" [(ngModel)]="derivarForm.observacion"></textarea>
-            </div>
+          <form>
+            <form action="#" class="dropzone">
+                <div class="fallback">
+                    <input name="file" type="file"
+                        accept="pdf/*,.pdf,.xlsx,.docx,.pptx" />
+                </div>
+            </form>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelar()">Cerrar</button>
               <button type="submit" class="btn btn-primary">Derivar</button>

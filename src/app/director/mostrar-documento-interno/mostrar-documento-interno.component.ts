@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DocumentoInterno, DocumentoInternoResult } from 'src/app/interface/documento-interno.interface';
-import { DocumentoInternoService } from 'src/app/services/documento-interno.service';
-import { TramiteInternoService } from 'src/app/services/tramite-interno.service';
+import { DocumentoInternoService } from '../../services/documento-interno.service';
 
 @Component({
   selector: 'app-mostrar-documento-interno',
@@ -15,7 +14,7 @@ export class MostrarDocumentoInternoComponent implements OnInit {
     observacion:'',
     accion:''
   }
-  constructor(private documentoService:DocumentoInternoService, private tramiteService: TramiteInternoService) { }
+  constructor(private documentoService:DocumentoInternoService) { }
 
   ngOnInit(): void {
     this.mostrarDocumentos();
@@ -36,26 +35,6 @@ export class MostrarDocumentoInternoComponent implements OnInit {
       }
     )
   }
-  asignarCod(codigo:any){
-    this.derivarForm.codigoDoc =codigo;
-  }
-  derivar(){
-    const data = new FormData();
-    data.append('observacion', this.derivarForm.observacion);
-    data.append('codigoDocumento', this.derivarForm.codigoDoc);
-    data.append('accion',this.derivarForm.accion);
-    this.tramiteService.postTramiteInterno(data).subscribe(
-      (data)=>{
-        console.log(data);
-        this.mostrarDocumentos();
-        this.cancelar();
-      },
-      (error)=>{
-        console.log(error);
-        
-      }
-    )
-  } 
   cancelar(){
     this.derivarForm= {
       codigoDoc:'',

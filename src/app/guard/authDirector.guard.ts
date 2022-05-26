@@ -6,7 +6,7 @@ import { LoginService } from '../auth/login/login.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardAdministrador implements CanActivateChild {
+export class AuthGuardDirector implements CanActivateChild {
   constructor(private authService: LoginService, private router: Router) {
   }
   canActivateChild(next: ActivatedRouteSnapshot,
@@ -18,7 +18,7 @@ export class AuthGuardAdministrador implements CanActivateChild {
       if (dataDecode.exp < date.getTime() / 1000) {
         return this.redirect();
       }
-      if (dataDecode.cargo !== 'ADMINISTRADOR') {
+      if (dataDecode.cargo !== 'DIRECTOR') {
         return this.redirect();
       }
       return true;

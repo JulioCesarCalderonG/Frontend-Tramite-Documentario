@@ -10,23 +10,27 @@ import { AuthModule } from './auth/auth.module';
 import { PublicModule } from './public/public.module';
 import { AdministradorModule } from './administrador/administrador.module';
 import { AuthGuardSecretaria } from './guard/authSecretaria.guard';
-import { AuthGuardDirector } from './guard/authAdministrador.guard';
+import { AuthGuardDirector } from './guard/authDirector.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorInterceptor } from './interceptor/interceptor.interceptor';
 import { IgetEditorModule } from '@iget/editor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DirectorModule } from './director/director.module';
+import { AuthGuardAdministrador } from './guard/authAdministrador.guard';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NopagefoundComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AdministradorModule,
     SecretarioModule,
+    DirectorModule,
     PublicModule,
     AuthModule,
     IgetEditorModule,
@@ -35,6 +39,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   providers: [
     AuthGuardSecretaria,
     AuthGuardDirector,
+    AuthGuardAdministrador,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorInterceptor,

@@ -7,6 +7,7 @@ import { AuthRoutingModule } from './auth/auth.routing';
 
 import { NopagefoundComponent } from './npagefound/nopagefound/nopagefound.component';
 import { AdminRoutingModule } from './administrador/administrador.routing';
+import { DirectorRoutingModule } from './director/director.routing';
 
 
 
@@ -26,6 +27,7 @@ const routes: Routes = [
     PublicRoutingModule,
     AdminRoutingModule,
     SecretarioRoutingModule,
+    DirectorRoutingModule,
     AuthRoutingModule
   ],
   exports:[RouterModule]

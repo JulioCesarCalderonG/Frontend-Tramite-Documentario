@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarSecreComponent } from './sidebar-secre/sidebar-secre.component';
 import { MessengerComponent } from './messenger/messenger.component';
+import { SidebarAdminComponent } from './sidebar-admin/sidebar-admin.component';
 
 
 
@@ -15,6 +16,7 @@ import { MessengerComponent } from './messenger/messenger.component';
     FooterComponent,
     SidebarSecreComponent,
     MessengerComponent,
+    SidebarAdminComponent,
   ],
   exports:[
     BreadcrumbsComponent,
@@ -22,6 +24,7 @@ import { MessengerComponent } from './messenger/messenger.component';
     FooterComponent,
     SidebarSecreComponent,
     MessengerComponent,
+    SidebarAdminComponent
   ],
   imports: [
     CommonModule

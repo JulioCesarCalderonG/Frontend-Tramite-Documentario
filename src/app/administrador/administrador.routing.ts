@@ -2,7 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AdministradorComponent } from './administrador.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthGuardDirector } from '../guard/authAdministrador.guard';
+import { AuthGuardAdministrador } from '../guard/authAdministrador.guard';
 
 
 const routes: Routes = [
@@ -14,7 +14,7 @@ const routes: Routes = [
             {path:'', component:DashboardComponent}
         ],
         canActivateChild:[
-            AuthGuardDirector
+            AuthGuardAdministrador
         ]
     }
 ];
