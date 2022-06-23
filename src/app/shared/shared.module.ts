@@ -6,6 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SidebarSecreComponent } from './sidebar-secre/sidebar-secre.component';
 import { MessengerComponent } from './messenger/messenger.component';
 import { SidebarAdminComponent } from './sidebar-admin/sidebar-admin.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -24,10 +25,12 @@ import { SidebarAdminComponent } from './sidebar-admin/sidebar-admin.component';
     FooterComponent,
     SidebarSecreComponent,
     MessengerComponent,
-    SidebarAdminComponent
+    SidebarAdminComponent,
+    
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ]
 })
 export class SharedModule { }
