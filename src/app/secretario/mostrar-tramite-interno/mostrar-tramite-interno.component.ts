@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ResultTramiteInterno, Tramiteinter } from 'src/app/interface/Tramite.interno.interface';
 import { TramiteInternoService } from 'src/app/services/tramite-interno.service';
 
@@ -9,7 +10,7 @@ import { TramiteInternoService } from 'src/app/services/tramite-interno.service'
 })
 export class MostrarTramiteInternoComponent implements OnInit {
   listTramite:Array<Tramiteinter>=[];
-  constructor(private tramiteInternoService:TramiteInternoService) { }
+  constructor(private tramiteInternoService:TramiteInternoService, private router:Router) { }
 
   ngOnInit(): void {
     this.mostrarTramite();
@@ -24,5 +25,8 @@ export class MostrarTramiteInternoComponent implements OnInit {
         console.log(error);
       }
     )
+  }
+  enviarRuta(codigo:string,codigoDoc:string){
+    this.router.navigate([`/secretaria/tramite-interno-detallado/${codigo}/${codigoDoc}`]);
   }
 }

@@ -4,6 +4,7 @@ import { ResultSeguimientoInter, Seguimiento } from 'src/app/interface/seguimien
 import { ResultTramiteInternoIndi, Tramiteinter } from 'src/app/interface/Tramite.interno.interface';
 import { SeguimientoInternoService } from 'src/app/services/seguimiento-interno.ts.service';
 import { TramiteInternoService } from 'src/app/services/tramite-interno.service';
+import { loadData, closeAlert } from '../../function/loadData';
 
 @Component({
   selector: 'app-tramite-interno-detallado',
@@ -13,6 +14,7 @@ import { TramiteInternoService } from 'src/app/services/tramite-interno.service'
 export class TramiteInternoDetalladoComponent implements OnInit {
   codigo?:any;
   codigoDoc?:any;
+  cargar:boolean=true;
   listSeguimiento?:Array<Seguimiento>;
   listTramite:Tramiteinter={
     codigo:'',
@@ -30,15 +32,24 @@ export class TramiteInternoDetalladoComponent implements OnInit {
   ngOnInit(): void {
     this.codigo=this._route.snapshot.paramMap.get('codigo');
     this.codigoDoc=this._route.snapshot.paramMap.get('codigoDoc');
+    console.log(this.codigo,this.codigoDoc);
+    
     this.mostrarDoc();
     this.mostrarSeg();
   }
   mostrarDoc(){
+    if (this.cargar) {
+      loadData('Cargando Datos','Espere mientras los datos se cargan......!')
+    }
+    
     this.tramiteInterService.getTramiteinterno(this.codigo).subscribe(
       (data:ResultTramiteInternoIndi)=>{
-        //console.log(data);
+        
         this.listTramite = data.tramiteinter;
-        console.log(this.listTramite);
+        this.cargar = false;
+        if (!this.cargar) {
+          closeAlert();
+        }
         
       },
       (error)=>{
@@ -51,7 +62,6 @@ export class TramiteInternoDetalladoComponent implements OnInit {
     this.seguiInterService.getSeguimiento(this.codigo).subscribe(
       (data:ResultSeguimientoInter)=>{
         this.listSeguimiento = data.seguimiento;
-        console.log(this.listSeguimiento);
         
       },
       (error)=>{

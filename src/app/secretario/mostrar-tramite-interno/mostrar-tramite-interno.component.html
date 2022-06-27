@@ -28,7 +28,7 @@
                     <a href="http://localhost:4000/api/pdf/documento-interno?codigo={{tramite.codigoDocumento}}"
                         target="_blank" data-toggle="tooltip" data-original-title="Edit"
                         class=" btn btn-circle btn-secondary btnAction"> <i class="fa fa-file-pdf-o text-inverse"></i> </a>
-                    <a [routerLink]="['/secretaria/tramite-interno-detallado/00001/OIT-00001-C-22']" routerLinkActive="router-link-active" 
+                    <a  (click)="enviarRuta(tramite.codigo, tramite.Codigodocumento!.codigoUnico)" 
                         target="_blank" data-toggle="tooltip" data-original-title="Edit"
                         class=" btn btn-circle btn-primary btnAction"> <i class="fa fa-file-pdf-o text-inverse"></i> </a>
                 </td>
