@@ -1,42 +1,62 @@
-<div class="card-no-border">
-    <section id="wrapper">
-        <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);">
-            <div class="login-box card">
-                <div class="card-body">
-                    <form class="form-horizontal form-material" (ngSubmit)="login()" #forma="ngForm">
-                        <h3 class="box-title m-b-20">Sign In</h3>
-                        <div class="form-group ">
-                            <div class="col-xs-12">
-                                <input class="form-control"  type="text" #dni="ngModel" [(ngModel)]="loginForm.dni"  required="" placeholder="Introduzca su DNI" name="dni" >
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <input class="form-control" type="password" #password="ngModel" [(ngModel)]="loginForm.password" required="" placeholder="Introduzca su Password" name="password">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                        </div>
-                        <div class="form-group text-center">
-                            <div class="col-xs-12 p-b-20">
-                                <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">Log In</button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
-                                <div class="social">
+<div class="header">
 
+    <!--Content before waves-->
+    <div class="inner-header flex">
+            <div class="login-register">
+                <div class="login-box card">
+                    <div class="card-body">
+                        <form class="form-horizontal form-material" (ngSubmit)="login()" #forma="ngForm">
+                            <h3 class="box-title m-b-20">Iniciar Sesion</h3>
+                            <div class="form-group ">
+                                <div class="col-xs-12">
+                                    <input class="form-control"  type="text" #dni="ngModel" [(ngModel)]="loginForm.dni"  required="" placeholder="Introduzca su DNI" name="dni" >
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group m-b-0">
-                            <div class="col-sm-12 text-center">
-
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <input class="form-control" type="password" #password="ngModel" [(ngModel)]="loginForm.password" required="" placeholder="Introduzca su Password" name="password">
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                            <div class="form-group row">
+                            </div>
+                            <div class="form-group text-center">
+                                <div class="col-xs-12 p-b-20">
+                                    <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">Iniciar Sesion</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
+                                    <div class="social">
+    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group m-b-0">
+                                <div class="col-sm-12 text-center">
+    
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+    </div>
+
+    <!--Waves Container-->
+    <div>
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="parallax">
+                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255, 255, 255, 0.7)" />
+                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255, 255, 255, 0.5)" />
+                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255, 255, 255, 0.3)" />
+                <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+            </g>
+        </svg>
+    </div>
+    <!--Waves end-->
+
 </div>

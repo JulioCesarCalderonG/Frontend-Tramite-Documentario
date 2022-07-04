@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Location } from '@angular/common';
 @Component({
   selector: 'app-director',
   templateUrl: './director.component.html',
@@ -8,10 +6,16 @@ import { Location } from '@angular/common';
 })
 export class DirectorComponent implements OnInit {
 
-  constructor(private _router: Router, private _location: Location) { }
+  constructor() { }
 
   ngOnInit(): void {
-    
+    this.cargar();
   }
-
+  cargar(){
+    if (sessionStorage.getItem('carga')==='0') {
+      location.reload(); 
+      sessionStorage.setItem('carga','1');
+      
+    }
+  }
 }
