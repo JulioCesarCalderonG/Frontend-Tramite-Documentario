@@ -35,14 +35,18 @@
                     <a 
                         target="_blank" data-toggle="tooltip" data-original-title="Edit"
                         *ngIf="documento.estadoFirma === 0"
-                        class="btn btn-circle btn-primary btnAction" 
+                        (click)="funCodigo(documento.id)"
+                        class="btn btn-circle btn-danger btnAction" 
                         data-toggle="modal" data-target="#derivacionModel" data-whatever="@mdo"
-                        > <i class="fa fa-light fa-signature text-inverse"></i> </a>
+                        > <i class="fa fa-light fa-signature text-inverse" ></i> </a>
                     <a 
                         target="_blank" data-toggle="tooltip" data-original-title="Edit"
-                        *ngIf="documento.estadoFirma === 1"  
-                        class="btn btn-circle btn-warning btnAction"
-                        > <i class="fa fa-light fa-signature"></i> </a>
+                        *ngIf="documento.estadoFirma === 1"
+                        disabled
+                        class="btn btn-circle btn-success btnAction" 
+                        style="cursor: not-allowed; pointer-events: none;"
+                        disabled
+                        > <i class="fa fa-light fa-signature text-inverse"></i> </a>
                 </td>
               </tr>
         </tbody>
@@ -59,16 +63,17 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form  (ngSubmit)="firmarDocumento()">
             <form action="#" class="dropzone">
                 <div class="fallback">
-                    <input name="file" type="file"
-                        accept="pdf/*,.pdf,.xlsx,.docx,.pptx" />
+                  <input name="file" type="file" #fileDocument (change)="capturarFileLogo($event)"
+                  accept="pdf/*,.pdf" />
                 </div>
+                
             </form>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelar()">Cerrar</button>
-              <button type="submit" class="btn btn-primary">Derivar</button>
+              <button type="submit" class="btn btn-primary" >Derivar</button>
             </div>
           </form>
         </div>

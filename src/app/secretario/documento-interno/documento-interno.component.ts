@@ -112,6 +112,8 @@ export class DocumentoInternoComponent implements OnInit {
     this.archivo = event.target.files;
     const imageBlob = this.fileDocument!.nativeElement.files[0];
     console.log(event.target.files);
+    console.log(this.archivo);
+    
     console.log(imageBlob);
     
   }

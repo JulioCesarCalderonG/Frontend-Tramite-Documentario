@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DocumentoInterno, DocumentoInternoResult } from 'src/app/interface/documento-interno.interface';
+import { FirmaInternoService } from 'src/app/services/firma-interno.service';
 import { DocumentoInternoService } from '../../services/documento-interno.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-mostrar-documento-interno',
@@ -9,12 +11,10 @@ import { DocumentoInternoService } from '../../services/documento-interno.servic
 })
 export class MostrarDocumentoInternoComponent implements OnInit {
   listDocumento?:DocumentoInterno[];
-  derivarForm={
-    codigoDoc:'',
-    observacion:'',
-    accion:''
-  }
-  constructor(private documentoService:DocumentoInternoService) { }
+  archivo?: File;
+  codigo:string = '';
+  @ViewChild('fileDocument', { static: false }) fileDocument?: ElementRef;
+  constructor(private toastr: ToastrService, private documentoService:DocumentoInternoService, private firmaService:FirmaInternoService) { }
 
   ngOnInit(): void {
     this.mostrarDocumentos();
@@ -27,7 +27,6 @@ export class MostrarDocumentoInternoComponent implements OnInit {
           this.listDocumento[i].codigo = this.listDocumento[i].codigoDocumento?.split('-')[1];
           this.listDocumento[i].tipo =this.listDocumento[i].codigoDocumento?.split('-')[2];
         }
-        console.log(this.listDocumento);
         
       },
       (error)=>{
@@ -35,11 +34,35 @@ export class MostrarDocumentoInternoComponent implements OnInit {
       }
     )
   }
-  cancelar(){
-    this.derivarForm= {
-      codigoDoc:'',
-      observacion:'',
-      accion:''
+  firmarDocumento(){
+    console.log(this.archivo);
+    const dato = new FormData();
+    if (this.archivo !== undefined) {
+      dato.append('archivo', this.archivo);
+      dato.append('codigo',this.codigo);
+      this.firmaService.postFirma(dato).subscribe(
+        (data)=>{
+          console.log(data);
+          this.toastr.success('Pdf Subido', data.msg)
+          this.mostrarDocumentos();
+          
+        },
+        (error)=>{
+          console.log(error);
+          
+        }
+      )
     }
+     
+  }
+  funCodigo(cod:number){
+    this.codigo = `${cod}`;
+  }
+  capturarFileLogo(event:any){
+    this.archivo = this.fileDocument!.nativeElement.files[0];
+    const imageBlob = this.fileDocument!.nativeElement.files[0];
+  }
+  cancelar(){
+    
   }
 }
