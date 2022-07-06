@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DirectorModule } from './director/director.module';
 import { AuthGuardAdministrador } from './guard/authAdministrador.guard';
 import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { RouterModule } from '@angular/router';
     AuthModule,
     IgetEditorModule,
     BrowserAnimationsModule,
-    RouterModule
+    RouterModule,
+    NgbModule
   ],
   providers: [
     AuthGuardSecretaria,

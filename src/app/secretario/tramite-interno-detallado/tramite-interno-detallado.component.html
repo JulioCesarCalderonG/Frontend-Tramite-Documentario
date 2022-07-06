@@ -1,77 +1,160 @@
-<h3 class="card-title text-center seguimi">Tramite Interno N° {{codigo}} </h3>
+<h3 class="card-title text-center seguimi">Tramite Interno N° {{ codigo }}</h3>
 
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="row">
-                <div class="col-lg-2">
-                    <label for="" class="form-group"><strong>Asunto:</strong></label>
-                </div>
-                <div class="col-lg-10">
-                    {{listTramite!.asunto}}
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-lg-2">
+          <label for="" class="form-group"><strong>Asunto:</strong></label>
         </div>
-        <div class="col-lg-12">
-            <div class="row">
-                <div class="col-lg-2">
-                    <label for="" class="form-group"><strong>Fecha:</strong></label>
-                </div>
-                <div class="col-lg-10">
-                    {{listTramite!.fecha}}
-                </div>
-            </div>
+        <div class="col-lg-10">
+          {{ listTramite!.asunto }}
         </div>
-        <div class="col-lg-12">
-            <div class="row">
-                <div class="col-lg-2">
-                    <label for="" class="form-group"><strong>Referencia:</strong></label>
-                </div>
-                <div class="col-lg-10">
-                    {{listTramite!.referencia}}
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-12">
-            <div class="row">
-                <div class="col-lg-2">
-                    <label for="" class="form-group"><strong>Observacion:</strong></label>
-                </div>
-                <div class="col-lg-10">
-                    {{listTramite!.observacion}}
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-12 ">
-            <button class="btn btn-rounded btn-info float-right">Detallado</button>
-        </div>
-        <div class="col-lg-12 table-responsive mt-5">
-            <h4 class="mb-3 text-center seguimi">Seguimiento</h4>
-            <table class="table full-color-table full-purple-table hover-table">
-                <thead>
-                    <tr>
-                        <th>Destino</th>
-                        <th>Fecha Derivacion</th>
-                        <th>Hora Derivacion</th>
-                        <th>Fecha Recepcion</th>
-                        <th>Hora Recepcion</th>
-                    </tr>
-                </thead>
-                <tbody class="">
-                    
-                    <tr *ngFor="let seguimiento of listSeguimiento">
-                        <td>{{seguimiento.Area.nombre}}</td>
-                        <td>{{seguimiento.fechaDerivado}}</td>
-                        <td>{{seguimiento.horaDerivado}}</td>
-                        <td>{{seguimiento.fechaRecepcion}}</td>
-                        <td>{{seguimiento.horaRecepcion}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-lg-12 table-responsive mt-5">
-            <h4 class="mb-3 text-center seguimi">Documentos Anexo</h4>
-            
-        </div>
+      </div>
     </div>
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-lg-2">
+          <label for="" class="form-group"><strong>Fecha:</strong></label>
+        </div>
+        <div class="col-lg-10">
+          {{ listTramite!.fecha }}
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-lg-2">
+          <label for="" class="form-group"><strong>Referencia:</strong></label>
+        </div>
+        <div class="col-lg-10">
+          {{ listTramite!.referencia }}
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-lg-2">
+          <label for="" class="form-group"><strong>Observacion:</strong></label>
+        </div>
+        <div class="col-lg-10">
+          {{ listTramite!.observacion }}
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <a
+        class="btn btn-outline-secondary waves-effect waves-light ml-3 float-right mt-5 mb-3"
+        href="{{url}}/firmadocumentointerno/{{codigoDoc}}"
+        target="_blank"
+      >
+      <span class="btn-label"><i class="fa fa-file-pdf-o"></i></span>
+      Documento Firmado
+      </a>
+    </div>
+    <div class="col-lg-12">
+      <button
+        class="btn btn-outline-secondary waves-effect waves-light ml-3 float-right"
+        data-toggle="modal"
+        data-target="#modalDetallado"
+        data-whatever="@getbootstrap"
+        (click)="verDetallado(listTramite.codigo)"
+      >
+      <span class="btn-label"><i class="fa fa-file-pdf-o"></i></span>
+        Tramite Detallado
+      </button>
+    </div>
+    <div class="col-lg-12 table-responsive mt-5">
+      <h4 class="mb-3 text-center seguimi">Seguimiento</h4>
+      <table class="table full-color-table full-purple-table hover-table">
+        <thead>
+          <tr>
+            <th>Destino</th>
+            <th>Fecha Derivacion</th>
+            <th>Hora Derivacion</th>
+            <th>Fecha Recepcion</th>
+            <th>Hora Recepcion</th>
+          </tr>
+        </thead>
+        <tbody class="">
+          <tr *ngFor="let seguimiento of listSeguimiento">
+            <td>{{ seguimiento.Area.nombre }}</td>
+            <td>{{ seguimiento.fechaDerivado }}</td>
+            <td>{{ seguimiento.horaDerivado }}</td>
+            <td>{{ seguimiento.fechaRecepcion }}</td>
+            <td>{{ seguimiento.horaRecepcion }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-lg-12 table-responsive mt-5">
+      <h4 class="mb-3 text-center seguimi">Documentos Anexo</h4>
+      <div class="container">
+        <a
+          *ngFor="let anexo of listAnexoPdf"
+          class="btn btn-outline-secondary waves-effect waves-light ml-3"
+          target="_blank"
+          href="{{url}}/mostraranexo/interno/{{anexo.id}}"
+        >
+          <span class="btn-label"><i class="fa fa-file-pdf-o"></i></span>
+          {{anexo.archivo}}
+      </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="modalDetallado"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Ver Tramite Detallado N° {{ numeroTramite }}
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Country</th>
+              <th scope="col">Area</th>
+              <th scope="col">Population</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">hola</th>
+              <td>
+                <img class="me-2" style="width: 20px" />
+                hola
+              </td>
+              <td>hola</td>
+              <td>hola</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
 </div>

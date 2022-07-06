@@ -64,4 +64,5 @@ export class MostrarTramiteInternoDerivadoComponent implements OnInit {
     console.log(codigo,codigoDoc);
     this.router.navigate([`/secretaria/tramite-interno-detallado/${codigo}/${codigoDoc}`]);
   }
+  
 }
