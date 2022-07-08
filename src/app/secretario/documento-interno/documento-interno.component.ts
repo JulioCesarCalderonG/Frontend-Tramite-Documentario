@@ -5,10 +5,11 @@ import { AreaService } from 'src/app/services/area.service';
 import { DocumentoInternoService } from 'src/app/services/documento-interno.service';
 import { TipoDocumentoService } from 'src/app/services/tipo-documento.service';
 import { TipoDocResult, Tipodocumento, TipoDocResultInd } from '../../interface/tipoDocumento.interface';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { SelectAreas } from '../../interface/areaSelect.interface';
-import { FormControl } from '@angular/forms';
 import { EditorConfig } from '../../interface/AngularEditor.interface';
+import { TipoEnvioService } from 'src/app/services/tipo-envio.service';
+import { ResultTipoEnvio, Tipoenvio } from 'src/app/interface/TipoEnvio.interface';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-documento-interno',
   templateUrl: './documento-interno.component.html',
@@ -19,6 +20,7 @@ export class DocumentoInternoComponent implements OnInit {
   listTipoDoc: Array<Tipodocumento> = [];
   editorConfig = EditorConfig;
   listArea?: Array<Area>;
+  listEnvio?:Array<Tipoenvio>
   editAr: boolean = false;
   htmlContent = '';
   archivo?: Array<File>;
@@ -29,7 +31,8 @@ export class DocumentoInternoComponent implements OnInit {
     destinoOne:'',
     destinoTwo:[],
     referencia:'',
-    tipoDoc:''
+    tipoDoc:'',
+    tipoEnv:''
   }
   tipoDoc?:any;
   @ViewChild('fileDocument', { static: false }) fileDocument?: ElementRef;
@@ -38,13 +41,16 @@ export class DocumentoInternoComponent implements OnInit {
     private areaService: AreaService,
     private tipoDocService: TipoDocumentoService,
     private documentService: DocumentoInternoService,
-    
+    private tipoEnvioService:TipoEnvioService,
+    private toastr: ToastrService,
+    private router: Router
   ) {
   }
 
   ngOnInit():void{
     this.mostrarArea();
     this.mostrarTipoDoc();
+    this.mostrarTipoEnvio();
   }
   mostrarTipoDoc() {
     this.tipoDocService.getTipoDocumentos(1).subscribe(
@@ -66,6 +72,17 @@ export class DocumentoInternoComponent implements OnInit {
       },
       (error) => {
         console.log(error);
+      }
+    )
+  }
+  mostrarTipoEnvio(){
+    this.tipoEnvioService.getTipoEnvio().subscribe(
+      (data:ResultTipoEnvio)=>{
+        this.listEnvio=data.tipoenvio;
+      },
+      (error)=>{
+        console.log(error);
+        
       }
     )
   }
@@ -120,13 +137,15 @@ export class DocumentoInternoComponent implements OnInit {
   crearDocumento() {
     
     const formData = new FormData();
-    if (!document.getElementById('seleOne')?.classList.contains("invi")) {
+    console.log(this.documentForm);
+     if (!document.getElementById('seleOne')?.classList.contains("invi")) {
       console.log('Select one');
       formData.append('destino', this.documentForm.destinoOne);
     }
     if (!document.getElementById('seleTwo')?.classList.contains("invi")) {
       Array.from(this.documentForm.destinoTwo).forEach((f:any) => {formData.append('destino',f)});
     }
+    formData.append('tipoEnvio',this.documentForm.tipoEnv)
     formData.append('tipoDocumento', this.tipoDoc);
     formData.append('asunto', this.documentForm.asunto);
     if (this.documentForm.referencia !== '') {
@@ -139,11 +158,13 @@ export class DocumentoInternoComponent implements OnInit {
     this.documentService.postDocumento(formData).subscribe(
       (data) => {
         console.log(data);
+        this.toastr.success('Documento Creado', data.msg);
+        this.router.navigate(['/secretaria/mostrar-documento-interno'])
       },
       (error) => {
         console.log(error);
 
       }
-    )
+    ) 
   }
 }

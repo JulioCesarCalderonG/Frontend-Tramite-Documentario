@@ -15,7 +15,30 @@ export interface DocumentoInterno {
     referencia: null;
     estadoFirma: number;
     destino: string;
+    estadoDerivado?: number;
+    tipoEnvio?: number;
+    codigo?: string;
+    tipo?: string;
+    envio: number;
+}
+
+/* export interface DocumentoInternoResult {
+    ok: boolean;
+    msg: string;
+    documentoInter: DocumentoInterno[];
+}
+
+export interface DocumentoInterno {
+    id: number;
+    codigoDocumento: string;
+    asunto: string;
+    fecha: string;
+    descripcion: string;
+    referencia: null;
+    estadoFirma: number;
+    destino: string;
     codigo?: string;
     tipo?: string;
     estadoDerivado?:number;
 }
+ */

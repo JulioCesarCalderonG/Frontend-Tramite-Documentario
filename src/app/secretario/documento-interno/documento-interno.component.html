@@ -1,9 +1,18 @@
 
         <div class="card-body">
             <form (ngSubmit)="crearDocumento()">
+                <div class="form-group">
+                    <h6 class="m-b-10 ml-2">Seleccionar tipo Envio</h6>
+                    <select class="form-control" style="width: 100%; height:36px;"
+                        tabindex="-1" aria-hidden="true" [(ngModel)]="documentForm.tipoEnv">
+                        <option value="">Seleccionar una opcion</option>
+                        <option *ngFor="let envio of listEnvio" value="{{envio.id}}">{{envio.nombre.toUpperCase()}}
+                        </option>
+                    </select>
+                </div>
                 
                 <div class="form-group">
-                    <h5 class="m-b-10">Seleccionar tipo documento</h5>
+                    <h6 class="m-b-10 ml-2">Seleccionar tipo documento</h6>
                     <select (click)="verDoc($event)" class="form-control" style="width: 100%; height:36px;"
                         tabindex="-1" aria-hidden="true" [(ngModel)]="documentForm.tipoDoc">
                         <option value="">Seleccionar una opcion</option>
@@ -12,16 +21,16 @@
                     </select>
                 </div>
                 <div class="form-group invi" id="seleOne">
-                    <mat-label>Seleccionar el destino</mat-label>
-                    <mat-select [(ngModel)]="documentForm.destinoOne">
+                    <mat-label class="m-b-10 ml-2">Seleccionar el destino</mat-label>
+                    <mat-select [(ngModel)]="documentForm.destinoOne" class="form-control">
                       <mat-option *ngFor="let area of listArea" [value]="area.id">
                         {{area.nombre}}
                       </mat-option>
                     </mat-select>
                 </div>
                 <div class="form-group invi" id="seleTwo">
-                    <mat-label>Seleccionar el destino</mat-label>
-                    <mat-select [(ngModel)]="documentForm.destinoTwo" multiple>
+                    <mat-label class="m-b-10 ml-2">Seleccionar el destino</mat-label>
+                    <mat-select class="form-control" [(ngModel)]="documentForm.destinoTwo" multiple>
                       <mat-option *ngFor="let topping of listArea" [value]="topping.id">{{topping.nombre}}</mat-option>
                     </mat-select>
                 </div>

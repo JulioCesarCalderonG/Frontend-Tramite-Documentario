@@ -23,6 +23,7 @@ import { MostrarDocumentoInternoComponent } from './mostrar-documento-interno/mo
 import { MostrarTramiteInternoComponent } from './mostrar-tramite-interno/mostrar-tramite-interno.component';
 import { MostrarTramiteInternoDerivadoComponent } from './mostrar-tramite-interno-derivado/mostrar-tramite-interno-derivado.component';
 import { TramiteInternoDetalladoComponent } from './tramite-interno-detallado/tramite-interno-detallado.component';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -53,7 +54,8 @@ import { TramiteInternoDetalladoComponent } from './tramite-interno-detallado/tr
     AngularEditorModule,
     NgMultiSelectDropDownModule.forRoot(),
     MaterialModule,
-    MatSelectModule
+    MatSelectModule,
+    ToastrModule.forRoot(),
   ],
   providers:[
 

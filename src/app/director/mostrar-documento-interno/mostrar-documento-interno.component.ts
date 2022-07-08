@@ -3,7 +3,6 @@ import { DocumentoInterno, DocumentoInternoResult } from 'src/app/interface/docu
 import { FirmaInternoService } from 'src/app/services/firma-interno.service';
 import { DocumentoInternoService } from '../../services/documento-interno.service';
 import { ToastrService } from 'ngx-toastr';
-
 @Component({
   selector: 'app-mostrar-documento-interno',
   templateUrl: './mostrar-documento-interno.component.html',
@@ -35,7 +34,6 @@ export class MostrarDocumentoInternoComponent implements OnInit {
     )
   }
   firmarDocumento(){
-    console.log(this.archivo);
     const dato = new FormData();
     if (this.archivo !== undefined) {
       dato.append('archivo', this.archivo);
@@ -52,6 +50,8 @@ export class MostrarDocumentoInternoComponent implements OnInit {
           
         }
       )
+    }else{
+      this.toastr.warning('No se selecciono ningun documento como firma', 'No seleccionado')
     }
      
   }

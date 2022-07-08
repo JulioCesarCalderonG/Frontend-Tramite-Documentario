@@ -13,6 +13,9 @@ export class DocumentoInternoService {
   getDocumentosInternos():Observable<any>{
     return this.http.get(this.url);
   }
+  getDocumentoDerivadoInter():Observable<any>{
+    return this.http.get(`${this.url}/documentoderivado`);
+  }
   postDocumento(data:FormData):Observable<any>{
     return this.http.post(this.url,data);
   }

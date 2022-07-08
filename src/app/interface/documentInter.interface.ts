@@ -7,4 +7,5 @@ export interface DocumentInter{
     destinoOne:string;
     destinoTwo:Array<string>;
     tipoDoc:string;
+    tipoEnv:string
 }

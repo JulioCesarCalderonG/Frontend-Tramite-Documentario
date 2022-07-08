@@ -1,89 +1,110 @@
-<h4 class="card-title">Responsive Table </h4>
-<h6 class="card-subtitle">Create responsive tables by wrapping any <code>.table</code> in
-    <code>.table-responsive </code>
-</h6>
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Codigo</th>
-                <th>Tipo Documento</th>
-                <th>Asunto</th>
-                <th>Fecha</th>
-                <th>Referencia</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let documento of listDocumento">
-                <td><a href="javascript:void(0)">{{documento.codigo}}</a></td>
-                <td>{{documento.tipo}}</td>
-                <td>{{documento.asunto}}</td>
-                <td>{{documento.fecha}}</td>
-                <td>{{documento.referencia}}</td>
-                <td *ngIf="documento.estadoFirma === 0">
-                    <div class="label label-table label-danger" >Sin firmar</div>
-                </td>
-                <td *ngIf="documento.estadoFirma === 1">
-                    <div class="label label-table label-success" >Firmado</div>
-                </td>
-                <td class="text-nowrap text-center">
-                    <a href="http://localhost:4000/api/pdf/documento-interno?codigo={{documento.codigoDocumento}}"
-                        target="_blank" data-toggle="tooltip" data-original-title="Edit"
-                        class=" btn btn-circle btn-secondary btnAction"> <i class="fa fa-file-pdf-o text-inverse"></i> </a>
-                    <a 
-                        target="_blank" data-toggle="tooltip" data-original-title="Edit"
-                        *ngIf="documento.estadoDerivado === 0 && documento.estadoFirma===1"
-                        class="btn btn-circle btn-danger btnAction" (click)="asignarCod(documento.codigoDocumento)"
-                        data-toggle="modal" data-target="#derivacionModel" data-whatever="@mdo"
-                        > <i class="fa fa-paper-plane text-inverse m-r-20"></i> </a>
-                    <a 
-                        target="_blank" data-toggle="tooltip" data-original-title="Edit"
-                        *ngIf="documento.estadoDerivado === 0 && documento.estadoFirma===0"
-                        class="btn btn-circle btn-danger btnAction" (click)="asignarCod(documento.codigoDocumento)"
-                        style="cursor: not-allowed; pointer-events: none;"
-                        data-toggle="modal" data-target="#derivacionModel" data-whatever="@mdo"
-                        > <i class="fa fa-paper-plane text-inverse m-r-20"></i> </a>
-                    <a 
-                        target="_blank" data-toggle="tooltip" data-original-title="Edit"
-                        *ngIf="documento.estadoDerivado === 1"  
-                        class="btn btn-circle btn-success btnAction"
-                        style="cursor: not-allowed; pointer-events: none;"
-                        disabled
-                        > <i class="fa fa-paper-plane text-inverse m-r-20"></i> </a>
-                </td>
-              </tr>
-        </tbody>
-    </table>
-</div>
+<div class="card-header">
 
-<div class="modal fade" id="derivacionModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Derivar Documento</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form (ngSubmit)="derivar()">
-            <div class="form-group">
-              <label for="accion-text" class="col-form-label">Accion:</label>
-              <input class="form-control" placeholder="Accion" [(ngModel)]="derivarForm.accion">
-            </div>
-            <div class="form-group">
-              <label for="observacion-text" class="col-form-label">Observacion:</label>
-              <textarea class="form-control" id="observacion-text" [(ngModel)]="derivarForm.observacion"></textarea>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelar()">Cerrar</button>
-              <button type="submit" class="btn btn-primary">Derivar</button>
-            </div>
-          </form>
-        </div>
-       
+  <div class="card-tools">
+    <div class="input-group input-group-sm" style="width: 150px;">
+      <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-default">
+          <i class="fas fa-search"></i>
+        </button>
       </div>
     </div>
   </div>
+</div>
+<!-- /.card-header -->
+<div class="card-body table-responsive p-0">
+  <table class="table table-hover text-nowrap">
+    <thead>
+      <tr>
+        <th>Codigo</th>
+        <th>Tipo Documento</th>
+        <th>Asunto</th>
+        <th>Fecha</th>
+        <th>Referencia</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let documento of listDocumento">
+        <td><a>{{documento.codigo}}</a></td>
+        <td>{{documento.tipo}}</td>
+        <td>{{documento.asunto}}</td>
+        <td>{{documento.fecha}}</td>
+        <td>{{documento.referencia}}</td>
+        <td *ngIf="documento.estadoFirma === 0">
+          <div class="label label-table label-danger firma-no">Sin firmar</div>
+        </td>
+        <td *ngIf="documento.estadoFirma === 1">
+          <div class="label label-table label-success firma">Firmado</div>
+        </td>
+        <td class="text-center">
+          <a href="http://localhost:4000/api/pdf/documento-interno?codigo={{documento.codigoDocumento}}" target="_blank"
+            data-toggle="tooltip" data-original-title="Edit" class=" btn btn-circle btn-secondary btnAction"> <i
+              class="fa fa-file-pdf-o text-inverse"></i> </a>
+          <a target="_blank" data-toggle="tooltip" data-original-title="Edit"
+            *ngIf="documento.tipoEnvio===3"
+            class="btn btn-circle btn-warning btnAction" (click)="asignarCod(documento.codigoDocumento)"
+            style="cursor: not-allowed; pointer-events: none;"
+            data-toggle="modal" data-target="#derivacionModel" data-whatever="@mdo"> <i
+              class="fa fa-paper-plane text-inverse m-r-20"></i> </a>
+          <a target="_blank" data-toggle="tooltip" data-original-title="Edit"
+            *ngIf="documento.estadoDerivado === 0 && documento.estadoFirma===1 && documento.tipoEnvio!==3"
+            class="btn btn-circle btn-danger btnAction" (click)="asignarCod(documento.codigoDocumento)"
+            data-toggle="modal" data-target="#derivacionModel" data-whatever="@mdo"> <i
+              class="fa fa-paper-plane text-inverse m-r-20"></i> </a>
+          <a target="_blank" data-toggle="tooltip" data-original-title="Edit"
+            *ngIf="documento.estadoDerivado === 0 && documento.estadoFirma===0 && documento.tipoEnvio !==3"
+            class="btn btn-circle btn-danger btnAction" (click)="asignarCod(documento.codigoDocumento)"
+            style="cursor: not-allowed; pointer-events: none;" data-toggle="modal" data-target="#derivacionModel"
+            data-whatever="@mdo"> <i class="fa fa-paper-plane text-inverse m-r-20"></i> </a>
+          <a target="_blank" data-toggle="tooltip" data-original-title="Edit" *ngIf="documento.estadoDerivado === 1"
+            class="btn btn-circle btn-success btnAction" style="cursor: not-allowed; pointer-events: none;" disabled> <i
+              class="fa fa-paper-plane text-inverse m-r-20"></i> </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- /.card-body -->
+<div class="card-footer clearfix">
+  <ul class="pagination pagination-sm m-0 float-right">
+    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+  </ul>
+</div>
+
+<div class="modal fade" id="derivacionModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Derivar Documento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="derivar()">
+          <div class="form-group">
+            <label for="accion-text" class="col-form-label">Accion:</label>
+            <input class="form-control" placeholder="Accion" [(ngModel)]="derivarForm.accion">
+          </div>
+          <div class="form-group">
+            <label for="observacion-text" class="col-form-label">Observacion:</label>
+            <textarea class="form-control" id="observacion-text" [(ngModel)]="derivarForm.observacion"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelar()">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Derivar</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- /.card -->

@@ -1,66 +1,145 @@
-<!-- ============================================================== -->
-<!-- Left Sidebar - style you can find in sidebar.scss  -->
-<!-- ============================================================== -->
-<aside class="left-sidebar">
-    <!-- Sidebar scroll-->
-    <div class="scroll-sidebar">
-        <!-- Sidebar navigation-->
-        <nav class="sidebar-nav">
-            <ul id="sidebarnav">
-                <li class="user-profile">
-                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img
-                            src="../../../assets/images/users/profile.png" alt="user" /><span class="hide-menu">Steave
-                            Jobs </span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="javascript:void()">My Profile </a></li>
-                        <li><a href="javascript:void()">My Balance</a></li>
-                        <li><a href="javascript:void()">Inbox</a></li>
-                        <li><a href="javascript:void()">Account Setting</a></li>
-                        <li><a href="javascript:void()">Logout</a></li>
-                    </ul>
-                </li>
-                <li class="nav-devider"></li>
-                <li class="nav-small-cap">PERSONAL</li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
-                            class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard <span
-                                class="label label-rouded label-themecolor pull-right">4</span></span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="index.html">Minimal </a></li>
-                        <li><a href="index2.html">Analytical</a></li>
-                        <li><a href="index3.html">Demographical</a></li>
-                        <li><a href="index4.html">Modern</a></li>
-                    </ul>
-                </li>
-                <li class=""> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
-                            class="mdi mdi-library-books"></i><span class="hide-menu">Tramite Interno</span></a>
-                    <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                        <li><a [routerLink]="['/secretaria/mostrar-tramite-interno']"
-                                routerLinkActive="router-link-active">Mostrar Tramite Interno</a></li>
-                    </ul>
-                </li>
-                <li class=""> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
-                            class="mdi mdi-file-word-box"></i><span class="hide-menu">Documento Interno</span></a>
-                    <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                        <li><a [routerLink]="['/secretaria/documento-interno']"
-                                routerLinkActive="router-link-active">Crear Documento Interno</a></li>
-                        <li><a [routerLink]="['/secretaria/mostrar-documento-interno']"
-                                routerLinkActive="router-link-active">Mostrar Documento</a></li>
-                        <li><a href="app-compose.html">Compose Mail</a></li>
-                    </ul>
-                </li>
-                <li class=""> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
-                            class="mdi mdi-file-word-box"></i><span class="hide-menu">Tramite Interno Derivado</span></a>
-                    <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                        <li><a [routerLink]="['/secretaria/mostrar-destino-interno']"
-                                routerLinkActive="router-link-active">Mostrar Tramite Derivado</a></li>
-                    </ul>
-                </li>
+ <!-- Main Sidebar Container -->
+ <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="../../index3.html" class="brand-link">
+      <img src="./assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">AdminLTE 3</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="./assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Alexander Pierce</a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2" >
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../../index.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Dashboard v1</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../../index2.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Dashboard v2</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../../index3.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Dashboard v3</p>
+                </a>
+              </li>
             </ul>
-        </nav>
-        <!-- End Sidebar navigation -->
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Tramite Interno
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a [routerLink]="['/secretaria/mostrar-tramite-interno']"
+                routerLinkActive="router-link-active" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Mostrar Tramite Interno</p>
+                </a>
+              </li>
+            </ul>
+            
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Tramite Interno Derivado
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a [routerLink]="['/secretaria/mostrar-destino-interno']"
+                routerLinkActive="router-link-active" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Mostrar Tramite Derivado</p>
+                </a>
+              </li>
+            </ul>
+            
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Documento Interno
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a [routerLink]="['/secretaria/documento-interno']"
+                routerLinkActive="router-link-active" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Crear Documento</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a [routerLink]="['/secretaria/mostrar-documento-interno']"
+                routerLinkActive="router-link-active" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Mostrar Documento</p>
+                </a>
+              </li>
+            </ul>
+            
+          </li>
+          <li class="nav-item">
+            <a href="../calendar.html" class="nav-link">
+              <i class="nav-icon far fa-calendar-alt"></i>
+              <p>
+                Calendar
+                <span class="badge badge-info right">2</span>
+              </p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
     </div>
-    <!-- End Sidebar scroll-->
-</aside>
-<!-- ============================================================== -->
-<!-- End Left Sidebar - style you can find in sidebar.scss  -->
-<!-- ============================================================== -->
+    <!-- /.sidebar -->
+  </aside>

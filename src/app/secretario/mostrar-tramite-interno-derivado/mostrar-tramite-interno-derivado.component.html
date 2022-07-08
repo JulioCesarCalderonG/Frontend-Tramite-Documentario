@@ -1,44 +1,156 @@
-<h4 class="card-title">Responsive Table </h4>
-<h6 class="card-subtitle">Create responsive tables by wrapping any <code>.table</code> in
-    <code>.table-responsive </code>
-</h6>
-<div class="table-responsive">
-    <table class="table text-center">
-        <thead>
-            <tr>
-                <th>Codigo Tramite</th>
-                <th>Asunto</th>
-                <th>Referencia</th>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Observacion</th>
-                <th>Accion</th>
-                <th>Opciones</th>
-            </tr>
-        </thead>
-        <tbody class="text-center">
-            <tr *ngFor="let destinos of listDestinoInter">
-                <td><a href="javascript:void(0)">{{destinos.codigoTramite}}</a></td>
-                <td>{{destinos.Tramiteinterno.asunto}}</td>
-                <td>{{destinos.Tramiteinterno.referencia}}</td>
-                <td>{{destinos.Tramiteinterno.fecha}}</td>
-                <td>{{destinos.Tramiteinterno.hora}}</td>
-                <td>{{destinos.Tramiteinterno.observacion}}</td>
-                <td *ngIf="destinos.estadoRecepcion === 0">
-                    <div class="label label-table label-danger" >Sin Recepcionar</div>
-                </td>
-                <td *ngIf="destinos.estadoRecepcion === 1">
-                    <div class="label label-table label-success" >Recepcionado</div>
-                </td>
-                <td class="text-nowrap" *ngIf="destinos.estadoRecepcion === 0">
-                    <button class="btn btn-warning waves-effect waves-light" type="button" (click)="recpcionar(destinos.id)"> <i class="fa fa-phone"></i> </button>
-                </td>
-                <td class="text-nowrap" *ngIf="destinos.estadoRecepcion === 1">
-                    <button class="btn btn-circle btn-primary mr-1" type="button" (click)="detallado(destinos.Tramiteinterno.codigo, destinos.Tramiteinterno.codigoDocumento)"> <i class="fa fa-eye"></i> </button>
-                    <button class="btn btn-circle btn-info mr-1" type="button"> <i class="fa fa-twitter"></i> </button>
-                    <button class="btn btn-circle btn-success mr-1" type="button"> <i class="fa fa-google-plus"></i> </button>
-                </td>
-                </tr>
-        </tbody>
-    </table>
+<div class="card-header">
+
+  <div class="card-tools">
+    <div class="input-group input-group-sm" style="width: 150px;">
+      <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-default">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.card-header -->
+<div class="card-body table-responsive p-0">
+  <table class="table table-hover text-nowrap">
+    <thead>
+      <tr>
+        <th>Codigo Tramite</th>
+        <th>Asunto</th>
+        <th>Referencia</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Observacion</th>
+        <th>Accion</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let destinos of listDestinoInter">
+        <td><a href="javascript:void(0)">{{destinos.codigoTramite}}</a></td>
+        <td>{{destinos.Tramiteinterno.asunto}}</td>
+        <td>{{destinos.Tramiteinterno.referencia}}</td>
+        <td>{{destinos.Tramiteinterno.fecha}}</td>
+        <td>{{destinos.Tramiteinterno.hora}}</td>
+        <td>{{destinos.Tramiteinterno.observacion}}</td>
+        <td *ngIf="destinos.estadoRecepcion === 0">
+          <div class="label label-table label-danger">Sin Recepcionar</div>
+        </td>
+        <td *ngIf="destinos.estadoRecepcion === 1">
+          <div class="label label-table label-success">Recepcionado</div>
+        </td>
+        <td class="text-nowrap" *ngIf="destinos.estadoRecepcion === 0">
+          <button class="btn btn-warning waves-effect waves-light" type="button" (click)="recpcionar(destinos.id)"> <i
+              class="fa fa-phone"></i> </button>
+        </td>
+        <td class="text-nowrap" *ngIf="destinos.estadoRecepcion === 1">
+          <button class="btn btn-circle btn-primary mr-1" type="button"
+            (click)="detallado(destinos.Tramiteinterno.codigo, destinos.Tramiteinterno.codigoDocumento)"> <i
+              class="fa fa-eye"></i> </button>
+          <button class="btn btn-circle btn-info mr-1" type="button" data-toggle="modal" data-target="#modalDetallado"
+            data-whatever="@getbootstrap"> <i class="fa fa-address-book" (click)="agregarId(destinos.id)"></i> </button>
+          <button class="btn btn-circle btn-success mr-1" type="button"> <i class="fa fa-google-plus"></i> </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- /.card-body -->
+<div class="card-footer clearfix">
+  <ul class="pagination pagination-sm m-0 float-right">
+    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+  </ul>
+</div>
+
+<div class="modal fade" id="modalDetallado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Responder Tramite
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancelar()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <form (ngSubmit)="enviarRespuesta()">
+            <div class="form-group">
+              <h6 class="m-b-10 ml-2">Seleccionar tipo Envio</h6>
+              <select (click)="verDoc($event)" class="form-control" style="width: 100%; height:36px;" tabindex="-1"
+                aria-hidden="true" [(ngModel)]="respuestaForm.envio">
+                <option value="">Seleccionar una opcion</option>
+                <option *ngFor="let respuesta of listRespuesta" value="{{respuesta.id}}">
+                  {{respuesta.nombre.toUpperCase()}}
+                </option>
+              </select>
+            </div>
+            <div class="form-group invi" id="seleOne">
+              <div class="form-group">
+                <h6 class="m-b-10 ml-2">Seleccionar Area</h6>
+                <select  class="form-control" style="width: 100%; height:36px;" tabindex="-1"
+                  aria-hidden="true" [(ngModel)]="respuestaForm.area">
+                  <option value="">Seleccionar una opcion</option>
+                  <option *ngFor="let area of listArea" value="{{area.id}}">
+                    {{area.nombre.toUpperCase()}}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <h6 class="m-b-10 ml-2">Seleccionar Documento</h6>
+                <select  class="form-control" style="width: 100%; height:36px;" tabindex="-1"
+                  aria-hidden="true" [(ngModel)]="respuestaForm.documentoOne">
+                  <option value="">Seleccionar una opcion</option>
+                  <option *ngFor="let documento of listDocumento" value="{{documento.codigoDocumento}}">
+                    {{documento.codigo}}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Observacion</label>
+                <textarea class="form-control" rows="3" placeholder="Enter ..." [(ngModel)]="respuestaForm.observacionOne"></textarea>
+              </div>
+            </div>
+            <div class="form-group invi" id="seleTwo">
+              <div class="form-group">
+                <h6 class="m-b-10 ml-2">Seleccionar Documento</h6>
+                <select  class="form-control" style="width: 100%; height:36px;" tabindex="-1"
+                  aria-hidden="true" [(ngModel)]="respuestaForm.documentoTwo">
+                  <option value="">Seleccionar una opcion</option>
+                  <option *ngFor="let documento of listDocumento" value="{{documento.codigoDocumento}}">
+                    {{documento.codigo}}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Observacion</label>
+                <textarea class="form-control" rows="3" placeholder="Enter ..." [(ngModel)]="respuestaForm.observacionTwo"></textarea>
+              </div>
+            </div>
+            <div class="form-group invi" id="seleThree">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Observacion</label>
+                <textarea class="form-control" rows="3" placeholder="Enter ..." [(ngModel)]="respuestaForm.observacionThree"> </textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelar()"> 
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">Send message</button>
+            </div>
+          </form>
+        </div>
+      </div>
+     
+      
+    </div>
+  </div>
 </div>

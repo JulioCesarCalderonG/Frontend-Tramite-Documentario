@@ -1,0 +1,20 @@
+.firma-no{
+    background-color: red;
+    text-align: center;
+    justify-content: center;
+    border-radius: 10px;
+    color: white;
+    font-size: 15px;
+    padding: 3px;
+    font-weight: 700;
+}
+.firma{
+    background-color: #28a745;
+    text-align: center;
+    justify-content: center;
+    border-radius: 10px;
+    color: white;
+    font-size: 15px;
+    padding: 3px;
+    font-weight: 700;
+}
