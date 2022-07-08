@@ -10,6 +10,9 @@ export class DetalledestinointernoService {
   url = `${urlBack}/detalledestinointerno`
   constructor(private http: HttpClient) { }
 
+  getDetalleDestino(codigo:string):Observable<any>{
+    return this.http.get(`${this.url}/${codigo}`);
+  }
   postDetalleDestinoInterno(data:FormData):Observable<any>{
     return this.http.post(this.url,data)
   }

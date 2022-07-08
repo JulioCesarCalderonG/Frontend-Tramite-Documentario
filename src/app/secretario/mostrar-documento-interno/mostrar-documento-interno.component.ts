@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { urlBack } from 'src/app/api/apiTramite';
 import { DocumentoInterno, DocumentoInternoResult } from 'src/app/interface/documento-interno.interface';
 import { DocumentoInternoService } from 'src/app/services/documento-interno.service';
 import { TramiteInternoService } from 'src/app/services/tramite-interno.service';
@@ -15,6 +16,7 @@ export class MostrarDocumentoInternoComponent implements OnInit {
     observacion:'',
     accion:''
   }
+  url=urlBack;
   constructor(private documentoService:DocumentoInternoService, private tramiteService: TramiteInternoService) { }
 
   ngOnInit(): void {

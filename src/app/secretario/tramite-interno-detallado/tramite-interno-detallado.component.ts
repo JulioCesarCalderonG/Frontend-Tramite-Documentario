@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { urlBack } from 'src/app/api/apiTramite';
 import { Anexo, ResultAnexoPDF } from 'src/app/interface/AnexoPdf.interface';
+import { Detalle, DetalleInternoResult } from 'src/app/interface/DetalleDestino.interface';
 import {
   ResultSeguimientoInter,
   Seguimiento,
@@ -11,6 +12,7 @@ import {
   Tramiteinter,
 } from 'src/app/interface/Tramite.interno.interface';
 import { AnexointernopdfService } from 'src/app/services/anexointernopdf.service';
+import { DetalledestinointernoService } from 'src/app/services/detalledestinointerno.service';
 import { SeguimientoInternoService } from 'src/app/services/seguimiento-interno.ts.service';
 import { TramiteInternoService } from 'src/app/services/tramite-interno.service';
 import { loadData, closeAlert } from '../../function/loadData';
@@ -26,6 +28,7 @@ export class TramiteInternoDetalladoComponent implements OnInit {
   cargar: boolean = true;
   listSeguimiento?: Array<Seguimiento>;
   listAnexoPdf?:Array<Anexo>;
+  listDetalle?:Array<Detalle>
   listTramite: Tramiteinter = {
     codigo: '',
     asunto: '',
@@ -43,7 +46,8 @@ export class TramiteInternoDetalladoComponent implements OnInit {
     private _route: ActivatedRoute,
     private tramiteInterService: TramiteInternoService,
     private seguiInterService: SeguimientoInternoService,
-    private anexoInternoPdf:AnexointernopdfService
+    private anexoInternoPdf:AnexointernopdfService,
+    private detalleService:DetalledestinointernoService
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +58,7 @@ export class TramiteInternoDetalladoComponent implements OnInit {
     this.mostrarDoc();
     this.mostrarSeg();
     this.mostrarAnexo();
+    this.mostrarDetalladoDestino();
   }
   mostrarDoc() {
     if (this.cargar) {
@@ -91,6 +96,18 @@ export class TramiteInternoDetalladoComponent implements OnInit {
       (data:ResultAnexoPDF)=>{
         //console.log(data);
         this.listAnexoPdf=data.anexo;
+        
+      },
+      (error)=>{
+        console.log(error);
+        
+      }
+    )
+  }
+  mostrarDetalladoDestino(){
+    this.detalleService.getDetalleDestino(this.codigo).subscribe(
+      (data:DetalleInternoResult)=>{
+        this.listDetalle=data.detalle
         
       },
       (error)=>{

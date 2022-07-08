@@ -44,8 +44,8 @@
         </div>
       </div>
     </div>
-    
-   
+
+
   </div>
   <div class="card-header">
     <h3 class="card-title">Documento Firmado</h3>
@@ -54,14 +54,14 @@
     <div class="form-group">
       <div class="row">
         <div class="col-lg-6">
-          <a class="btn btn-success waves-effect waves-light ml-3"
-            href="{{url}}/firmadocumentointerno/{{codigoDoc}}" target="_blank">
+          <a class="btn btn-success waves-effect waves-light ml-3" href="{{url}}/firmadocumentointerno/{{codigoDoc}}"
+            target="_blank">
             <span class="btn-label"><i class="fa fa-file-pdf-o"></i></span>
             Documento Firmado
           </a>
         </div>
         <div class="col-lg-6">
-          
+
         </div>
       </div>
     </div>
@@ -69,10 +69,10 @@
   <div class="card-header">
     <h3 class="card-title">Seguimiento</h3>
     <button class="btn btn-primary btn-xs waves-effect waves-light ml-3 float-right" data-toggle="modal"
-          data-target="#modalDetallado" data-whatever="@getbootstrap" (click)="verDetallado(listTramite.codigo)">
-          <span class="btn-label"><i class="fa fa-file-pdf-o"></i></span>
-          Tramite Detallado
-        </button>
+      data-target="#modalDetallado" data-whatever="@getbootstrap" (click)="verDetallado(listTramite.codigo)">
+      <span class="btn-label"><i class="fa fa-file-pdf-o"></i></span>
+      Tramite Detallado
+    </button>
   </div>
   <div class="card-body">
     <div class="form-group card-body table-responsive p-0">
@@ -104,39 +104,25 @@
   <div class="card-body">
     <div class="form-group">
       <div class="container-fluid">
-        <a
-          *ngFor="let anexo of listAnexoPdf"
-          class="btn btn-outline-secondary waves-effect waves-light ml-3"
-          target="_blank"
-          href="{{url}}/mostraranexo/interno/{{anexo.id}}"
-        >
+        <a *ngFor="let anexo of listAnexoPdf" class="btn btn-outline-secondary waves-effect waves-light ml-3"
+          target="_blank" href="{{url}}/mostraranexo/interno/{{anexo.id}}">
           <span class="btn-label"><i class="fa fa-file-pdf-o"></i></span>
           {{anexo.archivo}}
-      </a>
+        </a>
       </div>
     </div>
   </div>
 </div>
 
-<div
-  class="modal fade"
-  id="modalDetallado"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered">
+<div class="modal fade bd-example-modal-lg" id="modalDetallado" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
           Ver Tramite Detallado N° {{ numeroTramite }}
         </h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -144,21 +130,26 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Country</th>
-              <th scope="col">Area</th>
-              <th scope="col">Population</th>
+              <th scope="col">Codigo Tramite</th>
+              <th scope="col">Observacion</th>
+              <th scope="col">Documento Adjuntado</th>
+              <th scope="col">Respuesta Tramite</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">hola</th>
+            <tr *ngFor="let detalle of listDetalle" >
+              <th scope="row" *ngIf="detalle.codigoDocumento">{{detalle.codigoDocumento}}</th>
+              <th scope="row" *ngIf="!detalle.codigoDocumento">{{detalle.codigoDocumento}}</th>
               <td>
-                <img class="me-2" style="width: 20px" />
-                hola
+                {{detalle.observacion}}
               </td>
-              <td>hola</td>
-              <td>hola</td>
+              <td *ngIf="!detalle.codigoDocumento">---</td>
+              <td *ngIf="detalle.codigoDocumento">
+                <a href="http://localhost:4000/api/pdf/documento-interno?codigo={{detalle.codigoDocumento}}"
+                  target="_blank" data-toggle="tooltip" data-original-title="Edit"
+                  class=" btn btn-circle btn-secondary btnAction"> <i class="fa fa-file-pdf-o text-inverse"></i> </a>
+              </td>
+              <td >{{detalle.RespuestaTramite.nombre}}</td>
             </tr>
           </tbody>
         </table>

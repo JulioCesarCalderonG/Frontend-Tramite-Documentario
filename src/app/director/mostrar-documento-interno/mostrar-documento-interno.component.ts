@@ -3,6 +3,7 @@ import { DocumentoInterno, DocumentoInternoResult } from 'src/app/interface/docu
 import { FirmaInternoService } from 'src/app/services/firma-interno.service';
 import { DocumentoInternoService } from '../../services/documento-interno.service';
 import { ToastrService } from 'ngx-toastr';
+import { urlBack } from 'src/app/api/apiTramite';
 @Component({
   selector: 'app-mostrar-documento-interno',
   templateUrl: './mostrar-documento-interno.component.html',
@@ -12,6 +13,7 @@ export class MostrarDocumentoInternoComponent implements OnInit {
   listDocumento?:DocumentoInterno[];
   archivo?: File;
   codigo:string = '';
+  url=urlBack;
   @ViewChild('fileDocument', { static: false }) fileDocument?: ElementRef;
   constructor(private toastr: ToastrService, private documentoService:DocumentoInternoService, private firmaService:FirmaInternoService) { }
 
