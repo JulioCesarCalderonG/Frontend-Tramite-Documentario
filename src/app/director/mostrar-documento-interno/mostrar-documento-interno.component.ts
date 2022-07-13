@@ -1,70 +1,91 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { DocumentoInterno, DocumentoInternoResult } from 'src/app/interface/documento-interno.interface';
+import {
+  DocumentoInterno,
+  DocumentoInternoResult,
+} from 'src/app/interface/documento-interno.interface';
 import { FirmaInternoService } from 'src/app/services/firma-interno.service';
 import { DocumentoInternoService } from '../../services/documento-interno.service';
 import { ToastrService } from 'ngx-toastr';
 import { urlBack } from 'src/app/api/apiTramite';
+import { WebsocketService } from 'src/app/socket/websocket.service';
 @Component({
   selector: 'app-mostrar-documento-interno',
   templateUrl: './mostrar-documento-interno.component.html',
-  styleUrls: ['./mostrar-documento-interno.component.css']
+  styleUrls: ['./mostrar-documento-interno.component.css'],
 })
 export class MostrarDocumentoInternoComponent implements OnInit {
-  listDocumento?:DocumentoInterno[];
+  listDocumento?: DocumentoInterno[];
   archivo?: File;
-  codigo:string = '';
-  url=urlBack;
+  codigo: string = '';
+  url = urlBack;
   @ViewChild('fileDocument', { static: false }) fileDocument?: ElementRef;
-  constructor(private toastr: ToastrService, private documentoService:DocumentoInternoService, private firmaService:FirmaInternoService) { }
+  constructor(
+    private toastr: ToastrService,
+    private documentoService: DocumentoInternoService,
+    private firmaService: FirmaInternoService,
+    private wsService:WebsocketService
+  ) {}
 
   ngOnInit(): void {
     this.mostrarDocumentos();
+    this.versock();
   }
-  mostrarDocumentos(){
+  mostrarDocumentos() {
     this.documentoService.getDocumentosInternos().subscribe(
-      (data:DocumentoInternoResult)=>{
+      (data: DocumentoInternoResult) => {
         this.listDocumento = data.documentoInter;
         for (let i = 0; i < this.listDocumento.length; i++) {
-          this.listDocumento[i].codigo = this.listDocumento[i].codigoDocumento?.split('-')[1];
-          this.listDocumento[i].tipo =this.listDocumento[i].codigoDocumento?.split('-')[2];
+          this.listDocumento[i].codigo =
+            this.listDocumento[i].codigoDocumento?.split('-')[1];
+          this.listDocumento[i].tipo =
+            this.listDocumento[i].codigoDocumento?.split('-')[2];
         }
-        
       },
-      (error)=>{
+      (error) => {
         console.log(error);
       }
-    )
+    );
   }
-  firmarDocumento(){
+  firmarDocumento() {
     const dato = new FormData();
     if (this.archivo !== undefined) {
       dato.append('archivo', this.archivo);
-      dato.append('codigo',this.codigo);
+      dato.append('codigo', this.codigo);
       this.firmaService.postFirma(dato).subscribe(
-        (data)=>{
+        (data) => {
           console.log(data);
-          this.toastr.success('Pdf Subido', data.msg)
+          this.toastr.success('Pdf Subido', data.msg);
           this.mostrarDocumentos();
-          
         },
-        (error)=>{
+        (error) => {
           console.log(error);
-          
         }
-      )
-    }else{
-      this.toastr.warning('No se selecciono ningun documento como firma', 'No seleccionado')
+      );
+    } else {
+      this.toastr.warning(
+        'No se selecciono ningun documento como firma',
+        'No seleccionado'
+      );
     }
-     
   }
-  funCodigo(cod:number){
+  funCodigo(cod: number) {
     this.codigo = `${cod}`;
   }
-  capturarFileLogo(event:any){
+  capturarFileLogo(event: any) {
     this.archivo = this.fileDocument!.nativeElement.files[0];
     const imageBlob = this.fileDocument!.nativeElement.files[0];
   }
-  cancelar(){
-    
+  cancelar() {}
+  versock() {
+    const area = sessionStorage.getItem('area');
+    this.wsService.listen(`crear-documento-interno-${area}`).subscribe(
+      (data) => {
+        //this.toastr.success('Documento creado con exito', 'Success');
+        this.mostrarDocumentos();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

@@ -10,6 +10,7 @@ import { TipoEnvioService } from 'src/app/services/tipo-envio.service';
 import { ResultTipoEnvio, Tipoenvio } from 'src/app/interface/TipoEnvio.interface';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { WebsocketService } from 'src/app/socket/websocket.service';
 @Component({
   selector: 'app-documento-interno',
   templateUrl: './documento-interno.component.html',
@@ -43,7 +44,8 @@ export class DocumentoInternoComponent implements OnInit {
     private documentService: DocumentoInternoService,
     private tipoEnvioService:TipoEnvioService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private wsServices:WebsocketService
   ) {
   }
 
@@ -157,7 +159,8 @@ export class DocumentoInternoComponent implements OnInit {
     }  
     this.documentService.postDocumento(formData).subscribe(
       (data) => {
-        console.log(data);
+        this.wsServices.emit(`crear-documento-interno`,'',(data:any)=>{console.log(data);
+        });
         this.toastr.success('Documento Creado', data.msg);
         this.router.navigate(['/secretaria/mostrar-documento-interno'])
       },
@@ -167,4 +170,5 @@ export class DocumentoInternoComponent implements OnInit {
       }
     ) 
   }
+  
 }
