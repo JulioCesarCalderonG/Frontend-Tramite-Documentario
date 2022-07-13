@@ -3,6 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
+
 import { AppComponent } from './app.component';
 import { NopagefoundComponent } from './npagefound/nopagefound/nopagefound.component';
 import { SecretarioModule } from './secretario/secretario.module';
@@ -38,7 +42,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     IgetEditorModule,
     BrowserAnimationsModule,
     RouterModule,
-    NgbModule
+    NgbModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [
     AuthGuardSecretaria,

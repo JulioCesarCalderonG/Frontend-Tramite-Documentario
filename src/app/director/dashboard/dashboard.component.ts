@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { WebsocketService } from 'src/app/socket/websocket.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,12 +10,15 @@ import { Router } from '@angular/router';
   ]
 })
 export class DashboardComponent implements OnInit {
-  count: number = 0;
-  constructor(private _router: Router, private _location: Location) { }
+  
+  constructor(private wsService:WebsocketService) { }
 
   ngOnInit(): void {
   }
-
-  refresh(): void {
+  escucharSocks(){
+    this.wsService.emit('crear-documento-interno','',(data:any)=>{
+      console.log(data);
+      
+    });
   }
 }
