@@ -18,6 +18,7 @@ export class MostrarDocumentoInternoComponent implements OnInit {
   archivo?: File;
   codigo: string = '';
   url = urlBack;
+  idArea=sessionStorage.getItem('area');
   @ViewChild('fileDocument', { static: false }) fileDocument?: ElementRef;
   constructor(
     private toastr: ToastrService,
@@ -53,9 +54,11 @@ export class MostrarDocumentoInternoComponent implements OnInit {
       dato.append('codigo', this.codigo);
       this.firmaService.postFirma(dato).subscribe(
         (data) => {
-          console.log(data);
-          this.toastr.success('Pdf Subido', data.msg);
+          this.wsService.emit('agregar-firma-interno','',(dat:any)=>{
+            console.log(dat);
+          });
           this.mostrarDocumentos();
+          this.toastr.success('Se firmo documento con exito','Success')
         },
         (error) => {
           console.log(error);
@@ -88,4 +91,5 @@ export class MostrarDocumentoInternoComponent implements OnInit {
       }
     );
   }
+  
 }

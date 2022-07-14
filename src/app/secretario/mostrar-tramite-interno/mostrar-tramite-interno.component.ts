@@ -12,6 +12,7 @@ import { TramiteInternoService } from 'src/app/services/tramite-interno.service'
 export class MostrarTramiteInternoComponent implements OnInit {
   listTramite:Array<Tramiteinter>=[];
   url=urlBack;
+  idArea=sessionStorage.getItem('area');
   constructor(private tramiteInternoService:TramiteInternoService, private router:Router) { }
 
   ngOnInit(): void {
