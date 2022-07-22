@@ -8,9 +8,11 @@ import { MostrarDocumentoInternoComponent } from './mostrar-documento-interno/mo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-
-
-
+import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { NgxEditorModule } from 'ngx-editor';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { CKEditorModule } from 'ng2-ckeditor';
 @NgModule({
   declarations: [
     DirectorComponent,
@@ -29,7 +31,16 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    FormsModule
+    FormsModule,
+    RichTextEditorModule,
+    AngularEditorModule,
+    NgxEditorModule,
+    FroalaEditorModule.forRoot(), 
+    FroalaViewModule.forRoot(),
+    CKEditorModule
+  ],
+  providers:[
+
   ]
 })
 export class DirectorModule { }

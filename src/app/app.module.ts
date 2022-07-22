@@ -23,7 +23,7 @@ import { DirectorModule } from './director/director.module';
 import { AuthGuardAdministrador } from './guard/authAdministrador.guard';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     RouterModule,
     NgbModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    RichTextEditorModule
   ],
   providers: [
     AuthGuardSecretaria,
