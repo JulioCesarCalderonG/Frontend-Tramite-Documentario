@@ -24,6 +24,7 @@ import { MostrarTramiteInternoComponent } from './mostrar-tramite-interno/mostra
 import { MostrarTramiteInternoDerivadoComponent } from './mostrar-tramite-interno-derivado/mostrar-tramite-interno-derivado.component';
 import { TramiteInternoDetalladoComponent } from './tramite-interno-detallado/tramite-interno-detallado.component';
 import { ToastrModule } from 'ngx-toastr';
+import { CKEditorModule } from 'ng2-ckeditor';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -56,6 +57,7 @@ import { ToastrModule } from 'ngx-toastr';
     MaterialModule,
     MatSelectModule,
     ToastrModule.forRoot(),
+    CKEditorModule
   ],
   providers:[
 
