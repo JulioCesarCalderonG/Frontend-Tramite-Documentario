@@ -1,62 +1,69 @@
-<div class="header">
-
-    <!--Content before waves-->
-    <div class="inner-header flex">
-            <div class="login-register">
-                <div class="login-box card">
-                    <div class="card-body">
-                        <form class="form-horizontal form-material" (ngSubmit)="login()" #forma="ngForm">
-                            <h3 class="box-title m-b-20">Iniciar Sesion</h3>
-                            <div class="form-group ">
-                                <div class="col-xs-12">
-                                    <input class="form-control"  type="text" #dni="ngModel" [(ngModel)]="loginForm.dni"  required="" placeholder="Introduzca su DNI" name="dni" >
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <input class="form-control" type="password" #password="ngModel" [(ngModel)]="loginForm.password" required="" placeholder="Introduzca su Password" name="password">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                            </div>
-                            <div class="form-group text-center">
-                                <div class="col-xs-12 p-b-20">
-                                    <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">Iniciar Sesion</button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
-                                    <div class="social">
-    
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group m-b-0">
-                                <div class="col-sm-12 text-center">
-    
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+<div class="global">
+  <div class="container">
+    <div class="row content">
+      <div class="col-md-6 mb-3">
+        <img
+          src="../../../assets/img/logorscp.jpg"
+          alt="Imagen Red"
+          class="img-fluid"
+        />
+      </div>
+      <div class="col-md-6 mt-5">
+        <h3 class="signin-text mb-3">Tramite Documentario RSCP</h3>
+        <form #forma="ngForm" (ngSubmit)="login()">
+          <div class="form-group">
+            <label for="dni">DNI</label>
+            <input
+              type="text"
+              name="dni"
+              placeholder="INGRESAR DNI"
+              class="form-control"
+              autocomplete="off"
+              #dni="ngModel"
+              [(ngModel)]="loginForm.dni"
+              required
+              [ngClass]="{'is-valid': !dni.invalid, 'is-invalid': dni.invalid}"
+              pattern="^[0-9]*$"
+            />
+            <div class="alert alert-danger" *ngIf="dni.invalid && (dni.dirty || dni.touched)">
+                <div *ngIf="dni.errors!.required">
+                    Introduzca un DNI valido
+                </div>
+                <div *ngIf="dni.errors && dni.errors.pattern">
+                    El DNI tiene un formato incorrecto, sigue este ejemplo: 78945612
                 </div>
             </div>
+          </div>
+          <div class="form-group">
+            <label for="password">CONTRASEÑA</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="INGRESAR CONTRASEÑA"
+              class="form-control"
+              #password="ngModel"
+              [(ngModel)]="loginForm.password"
+              required
+              [ngClass]="{'is-valid': !password.invalid, 'is-invalid': password.invalid}"
+            />
+            <div class="alert alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+                <div *ngIf="password.errors!.required">
+                    Introduzca una contraseña valida
+                </div>
+            </div>
+          </div>
+          <div class="form-group ml-4">
+            <input
+              type="checkbox"
+              name="checkbox"
+              class="form-check-input"
+              id="checkbox"
+            />
+            <label for="checkbox" class="form-check-label">Recordarme</label>
+          </div>
+          <button class="btn btn-class" type="submit" [disabled]="!forma.valid">Entrar</button>
+        </form>
+      </div>
     </div>
-
-    <!--Waves Container-->
-    <div>
-        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-            <defs>
-                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-            </defs>
-            <g class="parallax">
-                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255, 255, 255, 0.7)" />
-                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255, 255, 255, 0.5)" />
-                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255, 255, 255, 0.3)" />
-                <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
-            </g>
-        </svg>
-    </div>
-    <!--Waves end-->
-
+  </div>
 </div>

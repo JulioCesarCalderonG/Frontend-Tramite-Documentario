@@ -4,6 +4,7 @@ import { LoginService } from './login.service';
 import Swal from 'sweetalert2';
 import { LoginResult } from '../../interface/Login.interface';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
       dni: '',
       password: ''
     }
-  constructor(private loginService: LoginService, private router:Router) { }
+  constructor(private loginService: LoginService, private router:Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -44,7 +45,7 @@ export class LoginComponent implements OnInit {
        
       },
       (error)=>{
-        console.log(error);
+        this.toastr.error(error.error.msg,'Datos Incorrectos');
       }
     )
   }

@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthComponent } from './auth.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     RouterModule,
+    ToastrModule.forRoot(),
     HttpClientModule,
     FormsModule
   ]
