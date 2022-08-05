@@ -132,7 +132,8 @@
             <tr>
               <th scope="col">Codigo Tramite</th>
               <th scope="col">Observacion</th>
-              <th scope="col">Documento Adjuntado</th>
+              <th scope="col">Documento Firmado</th>
+              <th scope="col">Documentos Anexados</th>
               <th scope="col">Respuesta Tramite</th>
             </tr>
           </thead>
@@ -149,6 +150,7 @@
                   target="_blank" data-toggle="tooltip" data-original-title="Edit"
                   class=" btn btn-circle btn-secondary btnAction"> <i class="fa fa-file-pdf-o text-inverse"></i> </a>
               </td>
+              <td></td>
               <td >{{detalle.RespuestaTramite.nombre}}</td>
             </tr>
           </tbody>
@@ -156,9 +158,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Close
+          Cerrar
         </button>
-        <button type="button" class="btn btn-primary">Send message</button>
       </div>
     </div>
   </div>

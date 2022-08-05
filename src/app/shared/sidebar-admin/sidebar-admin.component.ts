@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar-admin.component.css']
 })
 export class SidebarAdminComponent implements OnInit {
-
+  usuario = `${sessionStorage.getItem('usuario')}`;
   constructor() { }
 
   ngOnInit(): void {

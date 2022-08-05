@@ -1,59 +1,167 @@
+<div class="card-body">
+  <form #forma="ngForm" (ngSubmit)="crearDocumento()">
+    <div class="form-group">
+      <h6 class="m-b-10 ml-2" for="tipoEnv">Seleccionar tipo Envio</h6>
+      <select
+        class="form-control"
+        style="width: 100%; height: 36px"
+        name="tipoEnv"
+        tabindex="-1"
+        aria-hidden="true"
+        #tipoEnv="ngModel"
+        [(ngModel)]="documentForm.tipoEnv"
+        required
+        [ngClass]="{
+          'is-valid': !tipoEnv.invalid,
+          'is-invalid': tipoEnv.invalid
+        }"
+      >
+        <option value="">Seleccionar una opcion</option>
+        <option *ngFor="let envio of listEnvio" value="{{ envio.id }}">
+          {{ envio.nombre.toUpperCase() }}
+        </option>
+      </select>
+      <div
+        class="alert alert-danger"
+        *ngIf="tipoEnv.invalid && (tipoEnv.dirty || tipoEnv.touched)"
+      >
+        <div *ngIf="tipoEnv.errors!.required">Seleccione una opcion valida</div>
+      </div>
+    </div>
 
-        <div class="card-body">
-            <form (ngSubmit)="crearDocumento()">
-                <div class="form-group">
-                    <h6 class="m-b-10 ml-2">Seleccionar tipo Envio</h6>
-                    <select class="form-control" style="width: 100%; height:36px;"
-                        tabindex="-1" aria-hidden="true" [(ngModel)]="documentForm.tipoEnv">
-                        <option value="">Seleccionar una opcion</option>
-                        <option *ngFor="let envio of listEnvio" value="{{envio.id}}">{{envio.nombre.toUpperCase()}}
-                        </option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <h6 class="m-b-10 ml-2">Seleccionar tipo documento</h6>
-                    <select (click)="verDoc($event)" class="form-control" style="width: 100%; height:36px;"
-                        tabindex="-1" aria-hidden="true" [(ngModel)]="documentForm.tipoDoc">
-                        <option value="">Seleccionar una opcion</option>
-                        <option *ngFor="let documento of listTipoDoc" value="{{documento.sigla}}">{{documento.nombre}}
-                        </option>
-                    </select>
-                </div>
-                <div class="form-group invi" id="seleOne">
-                    <mat-label class="m-b-10 ml-2">Seleccionar el destino</mat-label>
-                    <mat-select [(ngModel)]="documentForm.destinoOne" class="form-control">
-                      <mat-option *ngFor="let area of listArea" [value]="area.id">
-                        {{area.nombre}}
-                      </mat-option>
-                    </mat-select>
-                </div>
-                <div class="form-group invi" id="seleTwo">
-                    <mat-label class="m-b-10 ml-2">Seleccionar el destino</mat-label>
-                    <mat-select class="form-control" [(ngModel)]="documentForm.destinoTwo" multiple>
-                      <mat-option *ngFor="let topping of listArea" [value]="topping.id">{{topping.nombre}}</mat-option>
-                    </mat-select>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" placeholder="Asunto:" [(ngModel)]="documentForm.asunto">
-                </div>
-                <div class="form-group">
-                    <input class="form-control" placeholder="Referencia:" [(ngModel)]="documentForm.referencia">
-                </div>
-                <div class="form-group">
-                    <ckeditor
-                    [(ngModel)]="documentForm.descripcion">
-                    </ckeditor>
-                </div>
-                <h4><i class="ti-link"></i> Attachment</h4>
-                <form action="#" class="dropzone">
-                    <div class="fallback">
-                        <input name="file" type="file" multiple #fileDocument (change)="capturarFileLogo($event)"
-                            accept="pdf/*,.pdf,.xlsx,.docx,.pptx" />
-                    </div>
-                </form>
-                <button type="submit" class="btn btn-success m-t-20"><i class="fa fa-envelope-o"></i> Send</button>
-                <button class="btn btn-inverse m-t-20"><i class="fa fa-times"></i> Discard</button>
-            </form>
+    <div class="form-group">
+      <h6 class="m-b-10 ml-2" for="tipoDocumento">
+        Seleccionar tipo documento
+      </h6>
+      <select
+        id="tipoDoc"
+        (click)="verDoc($event)"
+        name="tipoDoc"
+        class="form-control"
+        style="width: 100%; height: 36px"
+        tabindex="-1"
+        aria-hidden="true"
+        #tipoDoc="ngModel"
+        [(ngModel)]="documentForm.tipoDoc"
+        required
+        [ngClass]="{
+          'is-valid': !tipoDoc.invalid,
+          'is-invalid': tipoDoc.invalid
+        }"
+      >
+        <option value="">Seleccionar una opcion</option>
+        <option
+          *ngFor="let documento of listTipoDoc"
+          value="{{ documento.sigla }}"
+        >
+          {{ documento.nombre }}
+        </option>
+      </select>
+      <div
+        class="alert alert-danger"
+        *ngIf="tipoDoc.invalid && (tipoDoc.dirty || tipoDoc.touched)"
+      >
+        <div *ngIf="tipoDoc.errors!.required">Seleccione una opcion valida</div>
+      </div>
+    </div>
+    <div class="form-group invi" id="seleOne">
+      <mat-label class="m-b-10 ml-2">Seleccionar el destino</mat-label>
+      <mat-select
+        [(ngModel)]="documentForm.destinoOne"
+        name="destinoUno"
+        class="form-control"
+      >
+        <mat-option *ngFor="let area of listArea" [value]="area.id">
+          {{ area.nombre }}
+        </mat-option>
+      </mat-select>
+    </div>
+    <div class="form-group invi" id="seleTwo">
+      <mat-label class="m-b-10 ml-2">Seleccionar el destino</mat-label>
+      <mat-select
+        class="form-control"
+        name="destinoTwo"
+        [(ngModel)]="documentForm.destinoTwo"
+        multiple
+      >
+        <mat-option *ngFor="let topping of listArea" [value]="topping.id">{{
+          topping.nombre
+        }}</mat-option>
+      </mat-select>
+    </div>
+    <div class="form-group">
+      <input
+        class="form-control"
+        placeholder="Asunto:"
+        [(ngModel)]="documentForm.asunto"
+        name="asunto"
+        #asunto="ngModel"
+        required
+        [ngClass]="{
+          'is-valid': !asunto.invalid,
+          'is-invalid': asunto.invalid
+        }"
+      />
+      <div
+        class="alert alert-danger"
+        *ngIf="asunto.invalid && (asunto.dirty || asunto.touched)"
+      >
+        <div *ngIf="asunto.errors!.required">Ingrese un asunto Valido</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <input
+        class="form-control"
+        placeholder="Referencia:"
+        [(ngModel)]="documentForm.referencia"
+      />
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-lg-10">
+          <ckeditor
+            [(ngModel)]="documentForm.descripcion"
+            name="descripcion"
+            #descripcion="ngModel"
+            required
+            [ngClass]="{
+              'is-valid': !descripcion.invalid,
+              'is-invalid': descripcion.invalid
+            }"
+          >
+          </ckeditor>
         </div>
- 
+        <div class="col-lg-2">
+            
+        </div>
+      </div>
+    </div>
+    <h4><i class="ti-link"></i> Adjuntar Anexo</h4>
+    <div class="form-group">
+      <form action="#" class="dropzone">
+        <div class="fallback">
+          <input
+            name="file"
+            type="file"
+            multiple
+            #fileDocument
+            (change)="capturarFileLogo($event)"
+            accept="pdf/*,.pdf,.xlsx,.docx,.pptx"
+          />
+        </div>
+      </form>
+    </div>
+    <div class="text-center">
+      <button
+        type="submit"
+        class="btn btn-success mt-5 mr-5"
+        [disabled]="!forma.valid"
+      >
+        <i class="fa fa-envelope-o"></i> Crear Documento
+      </button>
+      <button class="btn btn-warning mt-5">
+        <i class="fa fa-times"></i> Cancelar
+      </button>
+    </div>
+  </form>
+</div>

@@ -59,6 +59,8 @@ export class MostrarTramiteInternoDerivadoComponent implements OnInit {
   enviarRespuesta() {
     const formData = new FormData();
     console.log(this.respuestaForm);
+    console.log(this.idCodigo);
+    
     if (!document.getElementById('seleOne')?.classList.contains("invi")) {
       console.log('1');
       formData.append('envio', this.respuestaForm.envio);
@@ -82,11 +84,24 @@ export class MostrarTramiteInternoDerivadoComponent implements OnInit {
     this.detalleInternoService.postDetalleDestinoInterno(formData).subscribe(
       (data)=>{
         console.log(data);
-        
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Respuesta enviada con exito',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        this.mostrarDestinosInternos();
       },
       (error)=>{
         console.log(error);
-        
+        Swal.fire({
+          position: 'top-end',
+          icon: 'warning',
+          title: 'Ocurrio un problema al responder tramite',
+          showConfirmButton: false,
+          timer: 1500
+        })
       }
     )
   }
@@ -252,5 +267,6 @@ export class MostrarTramiteInternoDerivadoComponent implements OnInit {
       observacionTwo: '',
       observacionThree: ''
     }
+    this.idCodigo=''
   }
 }

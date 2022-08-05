@@ -8,6 +8,7 @@ import { DocumentoInternoService } from 'src/app/services/documento-interno.serv
 import { TramiteInternoService } from 'src/app/services/tramite-interno.service';
 import { WebsocketService } from 'src/app/socket/websocket.service';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-mostrar-documento-interno',
   templateUrl: './mostrar-documento-interno.component.html',
@@ -55,6 +56,7 @@ export class MostrarDocumentoInternoComponent implements OnInit {
   }
   derivar() {
     const data = new FormData();
+   if (this.derivarForm.codigoDoc !== '') {
     data.append('observacion', this.derivarForm.observacion);
     data.append('codigoDocumento', this.derivarForm.codigoDoc);
     data.append('accion', this.derivarForm.accion);
@@ -63,11 +65,27 @@ export class MostrarDocumentoInternoComponent implements OnInit {
         console.log(data);
         this.mostrarDocumentos();
         this.cancelar();
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Documento Derivado con exito',
+          showConfirmButton: false,
+          timer: 1500
+        })
       },
       (error) => {
         console.log(error);
       }
     );
+   }else{
+    Swal.fire({
+      position: 'top-end',
+      icon: 'warning',
+      title: 'Selecciona un documento a derivar',
+      showConfirmButton: false,
+      timer: 1500
+    })
+   }
   }
   cancelar() {
     this.derivarForm = {

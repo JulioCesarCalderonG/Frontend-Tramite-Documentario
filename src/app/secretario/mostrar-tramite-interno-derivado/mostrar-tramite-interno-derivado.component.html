@@ -50,7 +50,7 @@
             (click)="detallado(destinos.Tramiteinterno.codigo, destinos.Tramiteinterno.codigoDocumento)"> <i
               class="fa fa-eye"></i> </button>
           <button class="btn btn-circle btn-info mr-1" type="button" data-toggle="modal" data-target="#modalDetallado"
-            data-whatever="@getbootstrap"> <i class="fa fa-address-book" (click)="agregarId(destinos.id)"></i> </button>
+            data-whatever="@getbootstrap" (click)="agregarId(destinos.id)"> <i class="fa fa-address-book" ></i> </button>
           <button class="btn btn-circle btn-success mr-1" type="button"> <i class="fa fa-google-plus"></i> </button>
         </td>
       </tr>
@@ -142,9 +142,9 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelar()"> 
-                Close
+                Cancelar
               </button>
-              <button type="submit" class="btn btn-primary">Send message</button>
+              <button type="submit" class="btn btn-primary">Enviar Respuesta</button>
             </div>
           </form>
         </div>

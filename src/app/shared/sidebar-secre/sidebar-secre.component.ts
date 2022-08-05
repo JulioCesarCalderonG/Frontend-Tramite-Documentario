@@ -8,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarSecreComponent implements OnInit {
 
+  usuario = `${sessionStorage.getItem('usuario')}`;
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  
 }
