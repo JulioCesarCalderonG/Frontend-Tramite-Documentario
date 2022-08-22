@@ -13,6 +13,9 @@ export class TramiteInternoService {
   getTramiteInternos():Observable<any>{
     return this.http.get(this.url);
   }
+  getTramiteGlobalInterno():Observable<any>{
+    return this.http.get(`${this.url}/global/tramite`);
+  }
   postTramiteInterno(data:FormData):Observable<any>{
     return this.http.post(this.url,data);
   }

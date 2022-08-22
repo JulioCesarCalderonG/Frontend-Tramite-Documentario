@@ -24,6 +24,7 @@ import { AuthGuardAdministrador } from './guard/authAdministrador.guard';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
+import { FilterDocumentoInternoPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [

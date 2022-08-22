@@ -9,6 +9,7 @@ import { MostrarDocumentoInternoComponent } from './mostrar-documento-interno/mo
 import { MostrarTramiteInternoComponent } from './mostrar-tramite-interno/mostrar-tramite-interno.component';
 import { MostrarTramiteInternoDerivadoComponent } from './mostrar-tramite-interno-derivado/mostrar-tramite-interno-derivado.component';
 import { TramiteInternoDetalladoComponent } from './tramite-interno-detallado/tramite-interno-detallado.component';
+import { MostrarInternoGlobalComponent } from './mostrar-interno-global/mostrar-interno-global.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
             { path: 'mostrar-documento-interno', component: MostrarDocumentoInternoComponent },
             { path: 'mostrar-tramite-interno', component: MostrarTramiteInternoComponent },
             { path: 'mostrar-destino-interno', component: MostrarTramiteInternoDerivadoComponent },
+            { path: 'mostrar-tramite-interno-global', component: MostrarInternoGlobalComponent },
             { path: 'tramite-interno-detallado/:codigo/:codigoDoc', component: TramiteInternoDetalladoComponent }
         ],
         canActivateChild: [

@@ -23,6 +23,10 @@ export class MostrarDocumentoInternoComponent implements OnInit {
   };
   url = urlBack;
   idArea=sessionStorage.getItem('area');
+  p: number = 1;
+  filterPost='';
+  textBuscar?:string;
+
   constructor(
     private documentoService: DocumentoInternoService,
     private tramiteService: TramiteInternoService,
@@ -44,7 +48,6 @@ export class MostrarDocumentoInternoComponent implements OnInit {
           this.listDocumento[i].tipo =
             this.listDocumento[i].codigoDocumento?.split('-')[2];
         }
-        console.log(this.listDocumento);
       },
       (error) => {
         console.log(error);
@@ -62,7 +65,6 @@ export class MostrarDocumentoInternoComponent implements OnInit {
     data.append('accion', this.derivarForm.accion);
     this.tramiteService.postTramiteInterno(data).subscribe(
       (data) => {
-        console.log(data);
         this.mostrarDocumentos();
         this.cancelar();
         Swal.fire({
@@ -105,5 +107,20 @@ export class MostrarDocumentoInternoComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  busqueda(event:any){
+    const buscar= this.textBuscar!;
+    if (buscar?.length ===0) {
+      console.log('terminado');
+      
+    }
+    if(buscar?.length >= 1){
+      console.log('hola');
+    }
+    else{
+      console.log('fin');
+      
+    }
+    
   }
 }

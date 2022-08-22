@@ -5,11 +5,12 @@ import { ResultTramiteInterno, Tramiteinter } from 'src/app/interface/Tramite.in
 import { TramiteInternoService } from 'src/app/services/tramite-interno.service';
 
 @Component({
-  selector: 'app-mostrar-tramite-interno',
-  templateUrl: './mostrar-tramite-interno.component.html',
-  styleUrls: ['./mostrar-tramite-interno.component.css']
+  selector: 'app-mostrar-interno-global',
+  templateUrl: './mostrar-interno-global.component.html',
+  styleUrls: ['./mostrar-interno-global.component.css']
 })
-export class MostrarTramiteInternoComponent implements OnInit {
+export class MostrarInternoGlobalComponent implements OnInit {
+
   listTramite:Array<Tramiteinter>=[];
   url=urlBack;
   idArea=sessionStorage.getItem('area');
@@ -21,7 +22,7 @@ export class MostrarTramiteInternoComponent implements OnInit {
     this.mostrarTramite();
   }
   mostrarTramite(){
-    this.tramiteInternoService.getTramiteInternos().subscribe(
+    this.tramiteInternoService.getTramiteGlobalInterno().subscribe(
       (data:ResultTramiteInterno)=>{
         console.log(data);
         this.listTramite = data.tramiteinter

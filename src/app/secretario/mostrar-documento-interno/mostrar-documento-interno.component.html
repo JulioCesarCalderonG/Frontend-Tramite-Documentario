@@ -1,11 +1,11 @@
 <div class="card-header">
 
   <div class="card-tools">
-    <div class="input-group input-group-sm" style="width: 150px;">
-      <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+    <div class="input-group input-group-sm" style="width: 350px;">
+      <input type="text" name="table_search" class="form-control float-right" placeholder="Search" [(ngModel)]="filterPost" name="filterPost" placeholder="Ingrese su busqueda">
 
       <div class="input-group-append">
-        <button type="submit" class="btn btn-default">
+        <button type="submit" class="btn btn-primary">
           <i class="fas fa-search"></i>
         </button>
       </div>
@@ -14,7 +14,7 @@
 </div>
 <!-- /.card-header -->
 <div class="card-body table-responsive p-0">
-  <table class="table table-hover text-nowrap">
+  <table class="table table-hover text-nowrap mb-3">
     <thead>
       <tr>
         <th>Codigo</th>
@@ -27,10 +27,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let documento of listDocumento">
+      <tr *ngFor="let documento of listDocumento! | paginate: { itemsPerPage: 7, currentPage: p } | filter:filterPost">
         <td><a>{{documento.codigo}}</a></td>
         <td>{{documento.tipo}}</td>
-        <td>{{documento.asunto}}</td>
+        <td>{{documento.asunto.toLowerCase()}}</td>
         <td>{{documento.fecha}}</td>
         <td>{{documento.referencia}}</td>
         <td *ngIf="documento.estadoFirma === 0">
@@ -66,16 +66,7 @@
       </tr>
     </tbody>
   </table>
-</div>
-<!-- /.card-body -->
-<div class="card-footer clearfix">
-  <ul class="pagination pagination-sm m-0 float-right">
-    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-  </ul>
+  <pagination-controls class="text-right mt-3" (pageChange)="p = $event"></pagination-controls>
 </div>
 
 <div class="modal fade" id="derivacionModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

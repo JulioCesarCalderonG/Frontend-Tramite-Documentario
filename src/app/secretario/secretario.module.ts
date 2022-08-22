@@ -25,6 +25,9 @@ import { MostrarTramiteInternoDerivadoComponent } from './mostrar-tramite-intern
 import { TramiteInternoDetalladoComponent } from './tramite-interno-detallado/tramite-interno-detallado.component';
 import { ToastrModule } from 'ngx-toastr';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { FilterDocumentoInternoPipe } from '../pipes/filter.pipe';
+import { MostrarInternoGlobalComponent } from './mostrar-interno-global/mostrar-interno-global.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -34,7 +37,9 @@ import { CKEditorModule } from 'ng2-ckeditor';
     MostrarDocumentoInternoComponent,
     MostrarTramiteInternoComponent,
     MostrarTramiteInternoDerivadoComponent,
-    TramiteInternoDetalladoComponent
+    TramiteInternoDetalladoComponent,
+    FilterDocumentoInternoPipe,
+    MostrarInternoGlobalComponent
   ],
   exports:[
     DashboardComponent,
@@ -45,6 +50,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
   imports: [
     CommonModule,
     BrowserModule,
+    NgxPaginationModule,
     BrowserAnimationsModule,
     MatNativeDateModule,
     SharedModule,
