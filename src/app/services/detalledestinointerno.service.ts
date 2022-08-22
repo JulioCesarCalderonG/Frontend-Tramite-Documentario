@@ -16,4 +16,7 @@ export class DetalledestinointernoService {
   postDetalleDestinoInterno(data:FormData):Observable<any>{
     return this.http.post(this.url,data)
   }
+  getAnexoDetalle(codigo:string):Observable<any>{
+    return this.http.get(`${urlBack}/respuestatramite/codigodoc/${codigo}`);
+  }
 }

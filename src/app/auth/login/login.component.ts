@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
        sessionStorage.setItem('x-token',data.token);
        sessionStorage.setItem('carga','0');
        sessionStorage.setItem('area',`${data.userarea.idArea}`);
+       sessionStorage.setItem('idUsuario',`${data.userarea.Usuario.id}`);
        sessionStorage.setItem('usuario',`${data.userarea.Usuario.nombre} ${data.userarea.Usuario.apellido}`);
        if (data.userarea.Usuario.Cargo.nombre==='DIRECTOR') {
         this.router.navigate(['/director']);

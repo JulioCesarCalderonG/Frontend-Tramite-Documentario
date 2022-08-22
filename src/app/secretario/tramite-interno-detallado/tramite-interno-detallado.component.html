@@ -130,7 +130,7 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">Codigo Tramite</th>
+              <th scope="col">Codigo Documento</th>
               <th scope="col">Observacion</th>
               <th scope="col">Documento Firmado</th>
               <th scope="col">Documentos Anexados</th>
@@ -139,18 +139,23 @@
           </thead>
           <tbody>
             <tr *ngFor="let detalle of listDetalle" >
-              <th scope="row" *ngIf="detalle.codigoDocumento">{{detalle.codigoDocumento}}</th>
-              <th scope="row" *ngIf="!detalle.codigoDocumento">{{detalle.codigoDocumento}}</th>
+              <td scope="row" *ngIf="detalle.codigoDocumento">{{detalle.codigoDocumento}}</td>
+              <td scope="row" *ngIf="!detalle.codigoDocumento">{{detalle.codigoDocumento}}</td>
               <td>
                 {{detalle.observacion}}
               </td>
               <td *ngIf="!detalle.codigoDocumento">---</td>
               <td *ngIf="detalle.codigoDocumento">
-                <a href="http://localhost:4000/api/pdf/documento-interno?codigo={{detalle.codigoDocumento}}"
+                <a href="{{url}}/firmadocumentointerno/{{detalle.codigoDocumento}}"
+                  target="_blank" data-toggle="tooltip" data-original-title="Edit"
+                  class=" btn btn-circle btn-success btnAction"> <i class="fa fa-file-pdf-o text-inverse"></i> </a>
+              </td>
+              <td *ngIf="!detalle.codigoDocumento">---</td>
+              <td *ngIf="detalle.codigoDocumento" >
+                <a *ngFor="let anexo of detalle.anexoDetalle" href="{{url}}/mostraranexo/interno/{{anexo.id}}"
                   target="_blank" data-toggle="tooltip" data-original-title="Edit"
                   class=" btn btn-circle btn-secondary btnAction"> <i class="fa fa-file-pdf-o text-inverse"></i> </a>
               </td>
-              <td></td>
               <td >{{detalle.RespuestaTramite.nombre}}</td>
             </tr>
           </tbody>

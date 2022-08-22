@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { urlBack } from 'src/app/api/apiTramite';
 import { Anexo, ResultAnexoPDF } from 'src/app/interface/AnexoPdf.interface';
-import { Detalle, DetalleInternoResult } from 'src/app/interface/DetalleDestino.interface';
+import { Detalle, DetalleInternoResult, ResultAnexoDetalle } from 'src/app/interface/DetalleDestino.interface';
 import {
   ResultSeguimientoInter,
   Seguimiento,
@@ -27,8 +27,8 @@ export class TramiteInternoDetalladoComponent implements OnInit {
   codigoDoc?: any;
   cargar: boolean = true;
   listSeguimiento?: Array<Seguimiento>;
-  listAnexoPdf?:Array<Anexo>;
-  listDetalle?:Array<Detalle>
+  listAnexoPdf?: Array<Anexo>;
+  listDetalle?: Array<Detalle>
   listTramite: Tramiteinter = {
     codigo: '',
     asunto: '',
@@ -41,14 +41,14 @@ export class TramiteInternoDetalladoComponent implements OnInit {
     hora: '',
   };
   numeroTramite: string = '';
-  url=urlBack;
+  url = urlBack;
   constructor(
     private _route: ActivatedRoute,
     private tramiteInterService: TramiteInternoService,
     private seguiInterService: SeguimientoInternoService,
-    private anexoInternoPdf:AnexointernopdfService,
-    private detalleService:DetalledestinointernoService
-  ) {}
+    private anexoInternoPdf: AnexointernopdfService,
+    private detalleService: DetalledestinointernoService
+  ) { }
 
   ngOnInit(): void {
     this.codigo = this._route.snapshot.paramMap.get('codigo');
@@ -61,17 +61,12 @@ export class TramiteInternoDetalladoComponent implements OnInit {
     this.mostrarDetalladoDestino();
   }
   mostrarDoc() {
-    if (this.cargar) {
-      loadData('Cargando Datos', 'Espere mientras los datos se cargan......!');
-    }
+
 
     this.tramiteInterService.getTramiteinterno(this.codigo).subscribe(
       (data: ResultTramiteInternoIndi) => {
         this.listTramite = data.tramiteinter;
-        this.cargar = false;
-        if (!this.cargar) {
-          closeAlert();
-        }
+
       },
       (error) => {
         console.log(error);
@@ -93,26 +88,46 @@ export class TramiteInternoDetalladoComponent implements OnInit {
   }
   mostrarAnexo() {
     this.anexoInternoPdf.getAnexoInterno(this.codigoDoc).subscribe(
-      (data:ResultAnexoPDF)=>{
+      (data: ResultAnexoPDF) => {
         //console.log(data);
-        this.listAnexoPdf=data.anexo;
-        
+        this.listAnexoPdf = data.anexo;
+
       },
-      (error)=>{
+      (error) => {
         console.log(error);
-        
+
       }
     )
   }
-  mostrarDetalladoDestino(){
+  mostrarDetalladoDestino() {
+    if (this.cargar) {
+      loadData('Cargando Datos', 'Espere mientras los datos se cargan......!');
+    }
     this.detalleService.getDetalleDestino(this.codigo).subscribe(
-      (data:DetalleInternoResult)=>{
-        this.listDetalle=data.detalle
+      (data: DetalleInternoResult) => {
+
+        this.listDetalle = data.detalle;
+        for (let i = 0; i < this.listDetalle.length; i++) {
+          this.detalleService.getAnexoDetalle(this.listDetalle[i].codigoDocumento).subscribe(
+            (datos:ResultAnexoDetalle) => {
+              this.listDetalle![i].anexoDetalle = datos.anexo;
+              this.cargar = false;
+              if (!this.cargar) {
+                closeAlert();
+                
+              }
+            }, (error) => {
+              console.log(error);
+
+            }
+          )
+        }
+        console.log(this.listDetalle);
         
       },
-      (error)=>{
+      (error) => {
         console.log(error);
-        
+
       }
     )
   }
