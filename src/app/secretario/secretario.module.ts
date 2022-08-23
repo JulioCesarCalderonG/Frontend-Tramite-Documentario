@@ -28,6 +28,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FilterDocumentoInternoPipe } from '../pipes/filter.pipe';
 import { MostrarInternoGlobalComponent } from './mostrar-interno-global/mostrar-interno-global.component';
+import { EditarDocumentoInternoComponent } from './editar-documento-interno/editar-documento-interno.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -39,7 +40,8 @@ import { MostrarInternoGlobalComponent } from './mostrar-interno-global/mostrar-
     MostrarTramiteInternoDerivadoComponent,
     TramiteInternoDetalladoComponent,
     FilterDocumentoInternoPipe,
-    MostrarInternoGlobalComponent
+    MostrarInternoGlobalComponent,
+    EditarDocumentoInternoComponent
   ],
   exports:[
     DashboardComponent,

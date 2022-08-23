@@ -27,7 +27,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let documento of listDocumento! | paginate: { itemsPerPage: 7, currentPage: p } | filter:filterPost">
+      <tr *ngFor="let documento of listDocumento | paginate: { itemsPerPage: 7, currentPage: p } | filter:filterPost">
         <td><a>{{documento.codigo}}</a></td>
         <td>{{documento.tipo}}</td>
         <td>{{documento.asunto.toLowerCase()}}</td>
@@ -62,6 +62,8 @@
           <a target="_blank" data-toggle="tooltip" data-original-title="Edit" *ngIf="documento.estadoDerivado === 1"
             class="btn btn-circle btn-success btnAction" style="cursor: not-allowed; pointer-events: none;" disabled> <i
               class="fa fa-paper-plane text-inverse m-r-20"></i> </a>
+          <a [routerLink]="['/secretaria/editar-documento-interno']" routerLinkActive="router-link-active" 
+            data-toggle="tooltip" data-original-title="Edit" class=" btn btn-circle btn-warning btnAction"> <i class="fas fa-pencil-alt"></i> </a>
         </td>
       </tr>
     </tbody>

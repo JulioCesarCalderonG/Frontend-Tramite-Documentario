@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./mostrar-documento-interno.component.css'],
 })
 export class MostrarDocumentoInternoComponent implements OnInit {
-  listDocumento?: DocumentoInterno[];
+  listDocumento: DocumentoInterno[]=[];
   derivarForm = {
     codigoDoc: '',
     observacion: '',
