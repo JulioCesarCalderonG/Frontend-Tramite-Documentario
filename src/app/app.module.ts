@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
-const config: SocketIoConfig = { url: 'http://192.168.1.121:4000', options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
 
 import { AppComponent } from './app.component';
 import { NopagefoundComponent } from './npagefound/nopagefound/nopagefound.component';
